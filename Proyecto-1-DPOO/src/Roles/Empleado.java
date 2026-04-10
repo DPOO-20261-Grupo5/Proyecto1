@@ -1,5 +1,5 @@
 package Roles;
 
-public class Empleado {h
+public class Empleado {
 
 }
