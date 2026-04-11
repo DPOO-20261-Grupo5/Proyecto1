@@ -1,8 +1,13 @@
 
 public class CopiaJuego {
+	
+	//Atributos
+	
     private String codigo;
     private Juego juego;
     private boolean disponible;
+    
+    //Constructor
 
     public CopiaJuego(String codigo, Juego juego) {
         this.codigo = codigo;
@@ -10,6 +15,8 @@ public class CopiaJuego {
         this.disponible = true;
     }
 
+    //Métodos
+    
     public String getCodigo() {
         return codigo;
     }
