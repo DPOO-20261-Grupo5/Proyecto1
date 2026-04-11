@@ -1,15 +1,21 @@
 
 public class Empleado {
 	
+	//Atributos
+	
     private String nombre;
     private String idEmpleado;
     private boolean enTurno;
 
+    //Constructor
+    
     public Empleado(String nombre, String idEmpleado, boolean enTurno) {
         this.nombre = nombre;
         this.idEmpleado = idEmpleado;
         this.enTurno = enTurno;
     }
+    
+    //Métodos
 
     public String getNombre() {
         return nombre;
