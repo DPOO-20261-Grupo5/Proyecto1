@@ -1,6 +1,8 @@
 
 public class Platillo extends Producto{
 	
+	//Constructor
+	
 	public Platillo (String nombre, double precio ) {
 		super(nombre, precio);
 	}
