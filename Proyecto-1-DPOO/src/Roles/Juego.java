@@ -1,13 +1,19 @@
 
 public class Juego {
 	
+	//Atributo
+	
 	private String nombre;
 	private double precio;
+	
+	//Constructor
 	
 	public Juego (String nombre, double precio) {
 		this.nombre = nombre;
 		this.precio= precio;
 	}
+	
+	//Métodos
 	
 	public String getNombre() {
 		return nombre;
