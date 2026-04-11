@@ -1,13 +1,19 @@
 
 public class Producto {
+	 
+	 //Atributos
 	
      private String nombre;
      private double precio;
+     
+     //Constructor
      
      public Producto (String nombre, double precio) {
             this.nombre = nombre;
             setPrecio(precio);
      }
+     
+     //Métodos
             
      public String getNombre() {
     	 return nombre;
