@@ -13,11 +13,11 @@ public class Juego {
 		return nombre;
 	}
 	
-	public double getPrecio {
+	public double getPrecio(){
 		return precio;
 	}
 	
-	public void setNombre(String Nombre) {
+	public void setNombre(String nombre) {
 		if (nombre != null) {
 			this.nombre=nombre;
 		}
@@ -26,12 +26,11 @@ public class Juego {
 	public void setPrecio(double precio) {
 		if (precio>=0) {
 			this.precio=precio;
-		}
-		
+		}	
+	}
+	
 	public String mostrarInformacion() {
 	    return "Juego: " + nombre + " | Precio: " + precio;
-	    }
 	}
-
 
 }
