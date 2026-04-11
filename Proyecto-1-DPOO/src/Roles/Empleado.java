@@ -5,14 +5,14 @@ public class Empleado {
 	
     private String nombre;
     private String idEmpleado;
-    private boolean enTurno;
+    private Turno turno;
 
     //Constructor
     
-    public Empleado(String nombre, String idEmpleado, boolean enTurno) {
+    public Empleado(String nombre, String idEmpleado, Turno turno) {
         this.nombre = nombre;
         this.idEmpleado = idEmpleado;
-        this.enTurno = enTurno;
+        this.turno = turno;
     }
     
     //Métodos
@@ -25,11 +25,11 @@ public class Empleado {
         return idEmpleado;
     }
 
-    public boolean isEnTurno() {
-        return enTurno;
-    }
+    public Turno getTurno() {
+		return turno;
+	}
 
-    public void setNombre(String nombre) {
+	public void setNombre(String nombre) {
         if (nombre != null) {
             this.nombre = nombre;
         }
@@ -41,12 +41,12 @@ public class Empleado {
         }
     }
 
-    public void setEnTurno(boolean enTurno) {
-        this.enTurno = enTurno;
-    }
+	public void setTurno(Turno turno) {
+		this.turno = turno;
+	}
 
     public String mostrarInformacion() {
-        return "Empleado: " + nombre + " | ID: " + idEmpleado + " | En turno: " + enTurno;
+        return "Empleado: " + nombre + " | ID: " + idEmpleado + " | Turno: " + turno;
     }
 
 }
