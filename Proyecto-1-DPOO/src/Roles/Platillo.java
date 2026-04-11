@@ -2,7 +2,7 @@
 public class Platillo extends Producto{
 	
 	public Platillo (String nombre, double precio ) {
-		super(nombre, precio)
+		super(nombre, precio);
 	}
 	
 	@Override
