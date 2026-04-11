@@ -3,27 +3,29 @@ public class CopiaJuego {
 	
 	//Atributos
 	
-    private String codigo;
+    private String idCopia;
     private Juego juego;
     private boolean disponible;
+    private String estado;
     
     //Constructor
 
-    public CopiaJuego(String codigo, Juego juego) {
-        this.codigo = codigo;
+    public CopiaJuego(String codigo, Juego juego, String estado) {
+        this.idCopia = codigo;
         this.juego = juego;
         this.disponible = true;
+        this.estado = estado;
     }
 
     //Métodos
     
     public String getCodigo() {
-        return codigo;
+        return idCopia;
     }
 
-    public void setCodigo(String codigo) {
-        if (codigo != null) {
-            this.codigo = codigo;
+    public void setCodigo(String idCopia) {
+        if (idCopia != null) {
+            this.idCopia = idCopia;
         }
     }
 
@@ -51,8 +53,16 @@ public class CopiaJuego {
         disponible = true;
     }
 
-    public String mostrarInformacion() {
-        return "Copia: " + codigo + " | " + juego.mostrarInformacion() + " | Disponible: " + disponible;
+    public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public String mostrarInformacion() {
+        return "Copia: " + idCopia + " | " + juego.mostrarInformacion() + " | Disponible: " + disponible + " | Estado: " + estado;
     }
 
 }
