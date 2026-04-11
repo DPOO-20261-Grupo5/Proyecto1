@@ -1,14 +1,20 @@
 
 public class Bebida extends Platillo {
+
+	//Atributos
 	
 	private boolean alcoholica;
     private boolean caliente;
 	
+    //Constructor
+    
 	public Bebida (String nombre, double precio, boolean alcoholica, boolean caliente) {
 		super(nombre, precio);
 		this.alcoholica= alcoholica;
 		this.caliente = caliente;
 	}
+	
+	//Métodos
 	
 	public boolean isAlcoholica() {
 		return alcoholica;
