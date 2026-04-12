@@ -1,3 +1,4 @@
+package BoardGame;
 
 public class Bebida extends Platillo {
 

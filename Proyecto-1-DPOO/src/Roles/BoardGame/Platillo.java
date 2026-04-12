@@ -1,3 +1,4 @@
+package BoardGame;
 
 public class Platillo extends Producto{
 	

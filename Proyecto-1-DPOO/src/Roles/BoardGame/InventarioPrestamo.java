@@ -1,12 +1,13 @@
+package BoardGame;
 import java.util.List;
 
-public class InventarioVenta {
-	
+public class InventarioPrestamo {
+
 	//Atributos
 	private List<String> listaJuegos;
-
+	
 	//Constructor
-	public InventarioVenta(List<String> listaJuegos) {
+	public InventarioPrestamo(List<String> listaJuegos) {
 		super();
 		this.listaJuegos = listaJuegos;
 	}
@@ -19,5 +20,4 @@ public class InventarioVenta {
 	public void setListaJuegos(List<String> listaJuegos) {
 		this.listaJuegos = listaJuegos;
 	}
-	
 }

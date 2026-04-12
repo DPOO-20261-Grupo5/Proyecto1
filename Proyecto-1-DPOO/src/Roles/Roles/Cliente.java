@@ -2,10 +2,10 @@ package Roles;
 import java.util.ArrayList;
 import java.util.List;
 
-import Juego;
-import Mesa;
-import Prestamo;
-import Venta;
+import BoardGame.Juego;
+import BoardGame.Mesa;
+import BoardGame.Prestamo;
+import BoardGame.Venta;
 
 public class Cliente extends Usuario {
 	

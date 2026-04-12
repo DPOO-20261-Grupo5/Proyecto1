@@ -1,3 +1,4 @@
+package BoardGame;
 
 public class ItemVenta {
 	
@@ -17,5 +18,9 @@ public class ItemVenta {
 
     public double calcularSubtotal() {
         return cantidad * precioUnitario;
+    }
+    
+    public Producto getProducto(){
+    	return this.producto;
     }
 }

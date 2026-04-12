@@ -1,5 +1,5 @@
 package Roles;
-import Turno;
+import BoardGame.Turno;
 
 public class Empleado {
 	

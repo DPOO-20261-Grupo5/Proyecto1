@@ -1,3 +1,4 @@
+package BoardGame;
 import java.time.LocalDate;
 
 public class ReporteVentas {

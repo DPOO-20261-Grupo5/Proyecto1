@@ -1,3 +1,4 @@
+package BoardGame;
 import java.util.List;
 
 public class Pasteleria extends Platillo{
