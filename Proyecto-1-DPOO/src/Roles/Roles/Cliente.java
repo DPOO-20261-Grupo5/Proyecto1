@@ -1,5 +1,11 @@
+package Roles;
 import java.util.ArrayList;
 import java.util.List;
+
+import Juego;
+import Mesa;
+import Prestamo;
+import Venta;
 
 public class Cliente extends Usuario {
 	

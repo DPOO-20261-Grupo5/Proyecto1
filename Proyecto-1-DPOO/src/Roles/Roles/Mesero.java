@@ -1,5 +1,8 @@
+package Roles;
 import java.util.ArrayList;
 import java.util.List;
+
+import Juego;
 
 public class Mesero extends Empleado {
 	
