@@ -72,4 +72,8 @@ public class Cliente extends Usuario {
 	public void liberarMesa() {
 	    this.mesa = null;
 	}
+	
+	public List<Prestamo> getPrestamos(){
+		return this.prestamos;
+	}
 }

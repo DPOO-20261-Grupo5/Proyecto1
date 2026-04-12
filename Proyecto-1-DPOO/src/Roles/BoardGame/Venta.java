@@ -11,14 +11,14 @@ public class Venta {
     private int idVenta;
     private Date fecha;
     private List<ItemVenta> items;
-    private double porcentajePropina; // ej: 0.1 = 10%
+    private double porcentajePropina; 
 
     // Constructor
     public Venta(int idVenta, Date fecha) {
         this.idVenta = idVenta;
         this.fecha = fecha;
         this.items = new ArrayList<>();
-        this.porcentajePropina = 0.10; // sugerida
+        this.porcentajePropina = 0.10; 
     }
 
     // Agregar item
@@ -35,7 +35,7 @@ public class Venta {
         return subtotal;
     }
 
-    // Calcular impuestos
+   
     public double calcularImpuestos() {
         double impuestos = 0;
 
@@ -43,41 +43,41 @@ public class Venta {
             Producto p = item.getProducto();
 
             if (p instanceof Bebida || p instanceof Pasteleria) {
-                impuestos += item.calcularSubtotal() * 0.08; // consumo
+                impuestos += item.calcularSubtotal() * 0.08; 
             } else if (p instanceof JuegoVenta) {
-                impuestos += item.calcularSubtotal() * 0.19; // IVA
+                impuestos += item.calcularSubtotal() * 0.19; 
             }
         }
 
         return impuestos;
     }
 
-    // Calcular propina
+    
     public double calcularPropina() {
         return calcularSubtotal() * porcentajePropina;
     }
 
-    // Calcular total
+  
     public double calcularTotal() {
         return calcularSubtotal() + calcularImpuestos() + calcularPropina();
     }
 
-    // Calcular puntos (1%)
+   
     public int calcularPuntos() {
         return (int) (calcularTotal() * 0.01);
     }
 
     // Getters
     public int getIdVenta() {
-        return idVenta;
+        return this.idVenta;
     }
 
     public Date getFecha() {
-        return fecha;
+        return this.fecha;
     }
 
     public List<ItemVenta> getItems() {
-        return items;
+        return this.items;
     }
 
     // Cambiar propina
@@ -85,7 +85,6 @@ public class Venta {
         this.porcentajePropina = porcentaje;
     }
 
-    // toString (muy útil para consola)
     @Override
     public String toString() {
         return "Venta #" + idVenta +

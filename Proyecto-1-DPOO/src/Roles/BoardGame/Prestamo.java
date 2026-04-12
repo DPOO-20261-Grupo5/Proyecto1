@@ -3,10 +3,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import Roles.Usuario;
-
-
-
 public class Prestamo {
 
     // Atributos
@@ -27,47 +23,34 @@ public class Prestamo {
         this.activo = true;
         this.copiaJuego = copiaJuego;
 
-
-        // Marcar la copia como prestada
         copiaJuego.prestado();
 
-        // Guardar en historial
+       
         historial.add(this);
     }
     
-    
-    
-
     public Date getFechaPrestamo() {
-		return fechaPrestamo;
+		return this.fechaPrestamo;
 	}
-
-
-
-
 
 
 	public Date getFechaDevolucion() {
-		return fechaDevolucion;
+		return this.fechaDevolucion;
 	}
 
 
-
-
-
-
-	// Devolver juego
+	
     public void devolver(Date fechaDevolucion) {
         this.fechaDevolucion = fechaDevolucion;
         this.activo = false;
 
-        // Marcar copia como disponible
+        
         copiaJuego.devuelto();
     }
 
-    // Getters
+ 
     public int getIdPrestamo() {
-        return idPrestamo;
+        return this.idPrestamo;
     }
 
     public boolean isActivo() {
@@ -75,7 +58,7 @@ public class Prestamo {
     }
 
     public CopiaJuego getCopiaJuego() {
-        return copiaJuego;
+        return this.copiaJuego;
     }
 
 
@@ -84,9 +67,8 @@ public class Prestamo {
         return historial;
     }
 
-    // toString (útil para consola)
-    @Override
-    public String toString() {
+    
+    public String informacion() {
         return "Prestamo #" + idPrestamo +
                " | Juego: " + copiaJuego.getJuego().getNombre() +
                " | Activo: " + activo;

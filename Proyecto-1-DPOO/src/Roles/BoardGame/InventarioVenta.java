@@ -1,24 +1,55 @@
 package BoardGame;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class InventarioVenta {
-	
-	//Atributos
-	private List<String> listaJuegos;
 
-	//Constructor
-	public InventarioVenta(List<String> listaJuegos) {
-		super();
-		this.listaJuegos = listaJuegos;
-	}
+    // Atributos
+    private List<JuegoVenta> juegosVenta;
 
-	//Métodos
-	public List<String> getListaJuegos() {
-		return listaJuegos;
-	}
+    // Constructor
+    public InventarioVenta() {
+        this.juegosVenta = new ArrayList<>();
+    }
 
-	public void setListaJuegos(List<String> listaJuegos) {
-		this.listaJuegos = listaJuegos;
-	}
-	
+    // Métodos
+
+    public void agregarJuegoVenta(JuegoVenta juegoVenta) {
+        juegosVenta.add(juegoVenta);
+    }
+
+    public List<JuegoVenta> getJuegosVenta() {
+        return this.juegosVenta;
+    }
+
+   
+    public JuegoVenta buscarJuego(String nombre) {
+        for (JuegoVenta jv : juegosVenta) {
+            if (jv.getJuego().getNombre().equalsIgnoreCase(nombre)) {
+                return jv;
+            }
+        }
+        return null;
+    }
+
+    
+    public boolean hayStock(String nombre, int cantidad) {
+        JuegoVenta jv = buscarJuego(nombre);
+        if (jv != null) {
+            return jv.getStockDisponible() >= cantidad;
+        }
+        return false;
+    }
+
+    
+    public void venderJuego(String nombre, int cantidad) {
+        JuegoVenta jv = buscarJuego(nombre);
+
+        if (jv != null && jv.getStockDisponible() >= cantidad) {
+            jv.reducirStock(cantidad);
+        } else {
+            System.out.println("No hay stock suficiente");
+        }
+    }
 }

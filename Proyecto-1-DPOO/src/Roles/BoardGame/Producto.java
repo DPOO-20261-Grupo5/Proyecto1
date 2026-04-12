@@ -1,6 +1,6 @@
 package BoardGame;
 
-public class Producto {
+public abstract class Producto {
 	 
 	 //Atributos
 	
@@ -11,13 +11,13 @@ public class Producto {
      
      public Producto (String nombre, double precio) {
             this.nombre = nombre;
-            setPrecio(precio);
+            this.precio = precio;
      }
      
      //Métodos
             
      public String getNombre() {
-    	 return nombre;
+    	 return this.nombre;
      }
             
      public void setNombre (String nombre) {
@@ -33,15 +33,11 @@ public class Producto {
      }
      
      public double getPrecio() {
-    	 return precio;
+    	 return this.precio;
      }
      
-     public void setNombre (double precio) {
-    	 if (precio >= 0) {
-    		 this.precio=precio;
-    	 }
-     }
-     
+
+
      public String mostrarInformacion() {
     	 return "Producto: "+ nombre + " | Precio: " + precio;
      }

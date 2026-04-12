@@ -1,9 +1,11 @@
 package BoardGame;
+
 import java.time.LocalDate;
+import java.util.List;
 
 public class ReporteVentas {
 	
-	//Atributos
+	// Atributos
 	private LocalDate fechaInicio;
 	private LocalDate fechaFin;
 	private double ventasComida;
@@ -11,66 +13,80 @@ public class ReporteVentas {
 	private double impuestosTotales;
 	private double propinasTotales;
 	
-	//Constructor
-	public ReporteVentas(LocalDate fechaInicio, LocalDate fechaFin, double ventasComida, double ventasJuegos,
-			double impuestosTotales, double propinasTotales) {
-		super();
+	private List<Venta> ventas;
+	
+	// Constructor
+	public ReporteVentas(LocalDate fechaInicio, LocalDate fechaFin, List<Venta> ventas) {
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
-		this.ventasComida = ventasComida;
-		this.ventasJuegos = ventasJuegos;
-		this.impuestosTotales = impuestosTotales;
-		this.propinasTotales = propinasTotales;
+		this.ventas = ventas;
+		
+		calcularTotales();
 	}
 	
-	//Métodos
+	
+	public void calcularTotales() {
+		ventasComida = 0;
+		ventasJuegos = 0;
+		impuestosTotales = 0;
+		propinasTotales = 0;
 
-	public LocalDate getFechaInicio() {
-		return fechaInicio;
+		for (Venta v : ventas) {
+			
+			impuestosTotales += v.calcularImpuestos();
+			propinasTotales += v.calcularPropina();
+
+			
+			for (ItemVenta item : v.getItems()) {
+				Producto p = item.getProducto();
+
+				if (p instanceof Bebida || p instanceof Pasteleria) {
+					ventasComida += item.calcularSubtotal();
+				} else if (p instanceof JuegoVenta) {
+					ventasJuegos += item.calcularSubtotal();
+				}
+			}
+		}
 	}
-
-	public void setFechaInicio(LocalDate fechaInicio) {
-		this.fechaInicio = fechaInicio;
+	
+	
+	public double getTotalGeneral() {
+		return ventasComida + ventasJuegos;
+	}
+	
+	
+	public String mostrarReporte() {
+		return "REPORTE DE VENTAS\n" +
+		       "Desde: " + fechaInicio + " Hasta: " + fechaFin + "\n" +
+		       "Ventas comida: " + ventasComida + "\n" +
+		       "Ventas juegos: " + ventasJuegos + "\n" +
+		       "Impuestos: " + impuestosTotales + "\n" +
+		       "Propinas: " + propinasTotales + "\n" +
+		       "TOTAL: " + getTotalGeneral();
+	}
+	
+	
+	public LocalDate getFechaInicio() {
+		return this.fechaInicio;
 	}
 
 	public LocalDate getFechaFin() {
-		return fechaFin;
-	}
-
-	public void setFechaFin(LocalDate fechaFin) {
-		this.fechaFin = fechaFin;
+		return this.fechaFin;
 	}
 
 	public double getVentasComida() {
-		return ventasComida;
-	}
-
-	public void setVentasComida(double ventasComida) {
-		this.ventasComida = ventasComida;
+		return this.ventasComida;
 	}
 
 	public double getVentasJuegos() {
-		return ventasJuegos;
-	}
-
-	public void setVentasJuegos(double ventasJuegos) {
-		this.ventasJuegos = ventasJuegos;
+		return this.ventasJuegos;
 	}
 
 	public double getImpuestosTotales() {
-		return impuestosTotales;
-	}
-
-	public void setImpuestosTotales(double impuestosTotales) {
-		this.impuestosTotales = impuestosTotales;
+		return this.impuestosTotales;
 	}
 
 	public double getPropinasTotales() {
-		return propinasTotales;
+		return this.propinasTotales;
 	}
-
-	public void setPropinasTotales(double propinasTotales) {
-		this.propinasTotales = propinasTotales;
-	}
-	
 }

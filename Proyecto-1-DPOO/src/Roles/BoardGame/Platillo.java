@@ -1,6 +1,6 @@
 package BoardGame;
 
-public class Platillo extends Producto{
+public abstract class Platillo extends Producto{
 	
 	//Constructor
 	
@@ -9,11 +9,8 @@ public class Platillo extends Producto{
 	}
 	
 	@Override
-	 public String mostrarInformacion() {
-		return "Platillo: "+ super.mostrarInformacion();
-    }
-
-    
-    
+	public String mostrarInformacion() {
+	    return "Platillo: " + getNombre() + " | Precio: " + getPrecio();
+	}
 
 }

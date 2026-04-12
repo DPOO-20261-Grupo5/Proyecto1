@@ -21,7 +21,7 @@ public class CopiaJuego {
     }
 
     public Juego getJuego() {
-        return juego;
+        return this.juego;
     }
 
     public boolean isDisponible() {
@@ -29,7 +29,7 @@ public class CopiaJuego {
     }
 
     public int getVecesPrestado() {
-        return vecesPrestado;
+        return this.vecesPrestado;
     }
 
     public void prestado() {
@@ -44,15 +44,15 @@ public class CopiaJuego {
     }
 
     public String getEstado() {
-        return estado;
+        return this.estado;
     }
 
     public void setEstado(String estado) {
         this.estado = estado;
     }
 
-    @Override
-    public String toString() {
+
+    public String informacion() {
         return "Copia: " + idCopia +
                " | Juego: " + juego.getNombre() +
                " | Disponible: " + disponible +

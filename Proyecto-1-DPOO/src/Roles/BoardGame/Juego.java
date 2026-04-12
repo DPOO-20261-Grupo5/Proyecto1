@@ -9,7 +9,7 @@ public class Juego {
     private int minJugadores;
     private int maxJugadores;
     private int edadMinima;
-    private String categoria; // Cartas, Tablero, Acción
+    private String categoria; // 
     private boolean esDificil;
 
     // Constructor
@@ -27,7 +27,7 @@ public class Juego {
         this.esDificil = esDificil;
     }
 
-    // Getters
+   
 
     public String getNombre() {
         return this.nombre;
@@ -61,30 +61,20 @@ public class Juego {
         return this.esDificil;
     }
 
-    // Método útil (extra, suma puntos)
+   
     public boolean esAptoPara(int numeroJugadores, int edad) {
         return numeroJugadores >= minJugadores &&
                numeroJugadores <= maxJugadores &&
                edad >= edadMinima;
     }
 
-    // toString (útil para pruebas en consola)
-    @Override
-    public String toString() {
+    
+    public String informacion() {
         return "Juego: " + nombre +
                " (" + categoria + ") - Jugadores: " +
                minJugadores + "-" + maxJugadores;
     }
 
-	
-	public void setPrecio(double precio) {
-		if (precio>=0) {
-			this.precio=precio;
-		}	
-	}
-	
-	public String mostrarInformacion() {
-	    return "Juego: " + nombre + " | Precio: " + precio;
-	}
-
 }
+
+

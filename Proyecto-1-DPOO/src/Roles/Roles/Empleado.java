@@ -1,7 +1,7 @@
 package Roles;
 import BoardGame.Turno;
 
-public class Empleado {
+public abstract class Empleado {
 	
 	//Atributos
 	
@@ -35,7 +35,7 @@ public class Empleado {
         if (nombre != null) {
             this.nombre = nombre;
         }
-    }
+    }	
 
     public void setIdEmpleado(String idEmpleado) {
         if (idEmpleado != null) {

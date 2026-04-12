@@ -1,64 +1,88 @@
 package BoardGame;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Mesa {
 
-	//Atributos
-	private int numeroMesa;
-	private int capacidad;
-	private int numeroPersonas;
-	private boolean hayNinos;
-	private boolean hayMenores;
-	
-	//Constructor
-	public Mesa(int numeroMesa, int capacidad, int numeroPersonas, boolean hayNinos, boolean hayMenores) {
-		super();
-		this.numeroMesa = numeroMesa;
-		this.capacidad = capacidad;
-		this.numeroPersonas = numeroPersonas;
-		this.hayNinos = hayNinos;
-		this.hayMenores = hayMenores;
-	}
+    private int numeroMesa;
+    private int capacidad;
+    private int numeroPersonas;
+    private boolean hayNinos;
+    private boolean hayMenores;
+    private List<Prestamo> prestamos;
+    private List<Producto> productos;
 
-	//Métodos
-	public int getNumeroMesa() {
-		return numeroMesa;
-	}
+    // Constructor
+    public Mesa(int numeroMesa, int capacidad, int numeroPersonas, boolean hayNinos, boolean hayMenores) {
+        this.numeroMesa = numeroMesa;
+        this.capacidad = capacidad;
+        this.numeroPersonas = numeroPersonas;
+        this.hayNinos = hayNinos;
+        this.hayMenores = hayMenores;
+        this.prestamos = new ArrayList<>();
+        this.productos = new ArrayList<>();
+    }
 
-	public void setNumeroMesa(int numeroMesa) {
-		this.numeroMesa = numeroMesa;
-	}
+    
+    public boolean puedeRecibirJuego(Juego juego) {
+        if (numeroPersonas < juego.getMinJugadores() || numeroPersonas > juego.getMaxJugadores()) {
+            return false;
+        }
 
-	public int getCapacidad() {
-		return capacidad;
-	}
+        if (hayNinos && juego.getEdadMinima() > 5) {
+            return false;
+        }
 
-	public void setCapacidad(int capacidad) {
-		this.capacidad = capacidad;
-	}
+        if (hayMenores && juego.getEdadMinima() >= 18) {
+            return false;
+        }
 
-	public int getNumeroPersonas() {
-		return numeroPersonas;
-	}
+        return true;
+    }
 
-	public void setNumeroPersonas(int numeroPersonas) {
-		this.numeroPersonas = numeroPersonas;
-	}
+   
+    public void agregarPrestamo(Prestamo prestamo) {
+        if (prestamos.size() < 2) {
+            prestamos.add(prestamo);
+        } else {
+            System.out.println("Máximo 2 juegos por mesa");
+        }
+    }
 
-	public boolean isHayNinos() {
-		return hayNinos;
-	}
+   
+    public boolean puedeConsumirBebida(Bebida bebida) {
 
-	public void setHayNinos(boolean hayNinos) {
-		this.hayNinos = hayNinos;
-	}
+        if (bebida.isAlcoholica() && hayMenores) {
+            return false;
+        }
 
-	public boolean isHayMenores() {
-		return hayMenores;
-	}
+        if (bebida.isCaliente()) {
+            for (Prestamo p : prestamos) {
+                if (p.getCopiaJuego().getJuego().getCategoria().equals("Accion")) {
+                    return false;
+                }
+            }
+        }
 
-	public void setHayMenores(boolean hayMenores) {
-		this.hayMenores = hayMenores;
-	}
-	
-	
+        return true;
+    }
+
+    
+    public void agregarProducto(Producto producto) {
+        productos.add(producto);
+    }
+
+  
+    public int getNumeroMesa() {
+        return this.numeroMesa;
+    }
+
+    public int getNumeroPersonas() {
+        return this.numeroPersonas;
+    }
+    
+    public int getCapacidad() {
+    	return this.capacidad;
+    }
 }
