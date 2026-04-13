@@ -50,6 +50,7 @@ public abstract class Empleado {
     public String mostrarInformacion() {
         return "Empleado: " + nombre + " | ID: " + idEmpleado + " | Turno: " + turno;
     }
+    
 
 }
 

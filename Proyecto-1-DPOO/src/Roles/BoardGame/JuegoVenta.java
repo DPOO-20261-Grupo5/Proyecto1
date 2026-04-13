@@ -22,6 +22,7 @@ public class JuegoVenta extends Producto {
     public int getStockDisponible() {
         return this.stockDisponible;
     }
+    
 
     public void reducirStock(int cantidad) {
         if (cantidad > 0 && stockDisponible >= cantidad) {
