@@ -3,24 +3,24 @@ package Roles;
 public class Usuario {
 	
 	//Atributos
-    protected int id;
+    protected String id;
     protected String nombre;
     protected String login;
     protected String password;
     
     //Constructor
-    public Usuario(int id, String nombre, String login, String password) {
+    public Usuario(String id, String nombre, String login, String password) {
         this.id = id;
         this.nombre = nombre;
         this.login = login;
         this.password = password;
     }
 
-	public int getId() {
+	public String getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

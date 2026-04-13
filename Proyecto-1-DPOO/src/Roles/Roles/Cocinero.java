@@ -5,8 +5,8 @@ import BoardGame.Turno;
 public class Cocinero extends Empleado {
 
     // Constructor correcto
-    public Cocinero(String nombre, String idEmpleado, Turno turno) {
-        super(nombre, idEmpleado, turno);
+    public Cocinero(String nombre, String id, Turno turno, String login, String password) {
+        super(nombre, id, turno, login, password );
     }
     
     public void prepararPlatillo(String nombrePlatillo) {

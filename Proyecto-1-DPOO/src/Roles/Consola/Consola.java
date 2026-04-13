@@ -13,8 +13,8 @@ public class Consola {
     	
     	List<Cliente> clientes = PersistenciaClientes.cargarClientes();
     	List<Venta> ventas = PersistenciaVentas.cargarVentas();
-    	//List<CopiaJuego> copias = PersistenciaJuegos.cargarJuegosPrestamo();
-    	//List<JuegoVenta> juegosVenta = PersistenciaJuegos.cargarJuegosVenta();
+    	List<CopiaJuego> copias = PersistenciaJuegos.cargarJuegosPrestamo();
+    	List<JuegoVenta> juegosVenta = PersistenciaJuegos.cargarJuegosVenta();
 
         System.out.println("=== INICIO SIMULACIÓN BOARD GAME CAFE ===\n");
 
@@ -128,8 +128,8 @@ public class Consola {
         System.out.println("\n" + reporte.mostrarReporte());
         PersistenciaClientes.guardarClientes(clientes);
         PersistenciaVentas.guardarVentas(ventas);
-        //PersistenciaJuegos.guardarJuegosPrestamo(copias);
-        //PersistenciaJuegos.guardarJuegosVenta(juegosVenta);
+        PersistenciaJuegos.guardarJuegosPrestamo(copias);
+        PersistenciaJuegos.guardarJuegosVenta(juegosVenta);
         System.out.println("\n=== FIN SIMULACIÓN ===");
     }
 }
