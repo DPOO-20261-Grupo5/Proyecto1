@@ -1,21 +1,20 @@
 package Persistencias;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import BoardGame.CopiaJuego;
 import BoardGame.Juego;
+import BoardGame.JuegoVenta;
 
 public class PersistenciaJuegos {
 
-    private static final String RUTA = "data/juegos.txt";
+    private static final String RUTA_PRESTAMO = "data/juegos_prestamo.txt";
+    private static final String RUTA_VENTA = "data/juegos_venta.txt";
 
-    // Guardar juegos
-    public static void guardarJuegos(List<Juego> juegos) {
+    
+    public static void guardarJuegosPrestamo(List<CopiaJuego> copias) {
 
         try {
             File carpeta = new File("data");
@@ -23,42 +22,109 @@ public class PersistenciaJuegos {
                 carpeta.mkdir();
             }
 
-            FileWriter writer = new FileWriter(RUTA);
+            FileWriter writer = new FileWriter(RUTA_PRESTAMO);
 
-            for (Juego j : juegos) {
+            for (CopiaJuego c : copias) {
                 writer.write(
-                    j.getNombre() + "," +
-                    j.getAnioPublicacion() + "," +
-                    j.getEmpresa() + "," +
-                    j.getMinJugadores() + "," +
-                    j.getMaxJugadores() + "," +
-                    j.getEdadMinima() + "," +
-                    j.getCategoria() + "," +
-                    j.isEsDificil() + "\n"
+                    c.getJuego().getNombre() + "," +
+                    c.getEstado() + "," +
+                    c.isDisponible() + "\n"
                 );
             }
 
             writer.close();
-            System.out.println("Juegos guardados correctamente");
+            System.out.println("Juegos de préstamo guardados");
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    // Cargar juegos
-    public static List<Juego> cargarJuegos() {
+    public static List<CopiaJuego> cargarJuegosPrestamo() {
 
-        List<Juego> juegos = new ArrayList<>();
+        List<CopiaJuego> copias = new ArrayList<>();
 
         try {
-            File archivo = new File(RUTA);
+            File archivo = new File(RUTA_PRESTAMO);
+
+            if (!archivo.exists()) {
+                return copias;
+            }
+
+            BufferedReader reader = new BufferedReader(new FileReader(RUTA_PRESTAMO));
+            String linea;
+
+            while ((linea = reader.readLine()) != null) {
+
+                String[] partes = linea.split(",");
+
+                int id = Integer.parseInt(partes[0]);
+                String nombreJuego = partes[1];
+                String estado = partes[2];
+                boolean disponible = Boolean.parseBoolean(partes[3]);
+
+                
+                Juego juego = new Juego(nombreJuego, 0, "N/A", 1, 10, 0, "N/A", false);
+
+                CopiaJuego copia = new CopiaJuego(id, juego, estado);
+
+                if (!disponible) {
+                    copia.prestado();
+                }
+
+                copias.add(copia);
+            }
+
+            reader.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return copias;
+    }
+
+    // =========================
+    // JUEGOS DE VENTA
+    // =========================
+    public static void guardarJuegosVenta(List<JuegoVenta> juegos) {
+
+        try {
+            File carpeta = new File("data");
+            if (!carpeta.exists()) {
+                carpeta.mkdir();
+            }
+
+            FileWriter writer = new FileWriter(RUTA_VENTA);
+
+            for (JuegoVenta j : juegos) {
+                writer.write(
+                    j.getJuego().getNombre() + "," +
+                    j.getPrecio() + "," +
+                    j.getStockDisponible() + "\n"
+                );
+            }
+
+            writer.close();
+            System.out.println("Juegos de venta guardados");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static List<JuegoVenta> cargarJuegosVenta() {
+
+        List<JuegoVenta> juegos = new ArrayList<>();
+
+        try {
+            File archivo = new File(RUTA_VENTA);
 
             if (!archivo.exists()) {
                 return juegos;
             }
 
-            BufferedReader reader = new BufferedReader(new FileReader(RUTA));
+            BufferedReader reader = new BufferedReader(new FileReader(RUTA_VENTA));
             String linea;
 
             while ((linea = reader.readLine()) != null) {
@@ -66,17 +132,15 @@ public class PersistenciaJuegos {
                 String[] partes = linea.split(",");
 
                 String nombre = partes[0];
-                int anioPublicacion = Integer.parseInt(partes[1]);
-                String empresa = partes[2];
-                int minJugadores = Integer.parseInt(partes[3]);
-                int maxJugadores = Integer.parseInt(partes[4]);
-                int edadMinima = Integer.parseInt(partes[5]);
-                String categoria = partes[6];
-                boolean esDificil = Boolean.parseBoolean(partes[7]);
+                double precio = Double.parseDouble(partes[1]);
+                int stock = Integer.parseInt(partes[2]);
 
-                Juego j = new Juego( nombre, anioPublicacion, empresa, minJugadores, maxJugadores, edadMinima, categoria, esDificil);
+                Juego juego = new Juego(nombre, 0, "N/A", 1, 10, 0, "N/A", false);
 
-                juegos.add(j);
+                JuegoVenta jv = new JuegoVenta(juego, precio, stock);
+                jv.setPrecio(precio);
+
+                juegos.add(jv);
             }
 
             reader.close();

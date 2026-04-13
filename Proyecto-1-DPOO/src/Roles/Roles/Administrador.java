@@ -7,8 +7,8 @@ import BoardGame.*;
 public class Administrador extends Empleado {
 
     // Constructor
-    public Administrador(String nombre, String idEmpleado, Turno turno) {
-        super(nombre, idEmpleado, turno);
+    public Administrador(String nombre, String id, Turno turno, String login, String password) {
+        super(nombre, id, turno, login, password );
     }
 
 

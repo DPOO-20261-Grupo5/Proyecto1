@@ -20,7 +20,7 @@ public class Cliente extends Usuario {
 	
 	//Constructor
 	public Cliente (int id, String nombre, String login, String password) {
-		super(id, nombre, login, password);
+		super(String.valueOf(id), nombre, login, password);
 		this.puntosFidelidad = 0;
 		this.prestamos = new ArrayList<Prestamo>();
 		this.juegosFavoritos = new ArrayList<Juego>();

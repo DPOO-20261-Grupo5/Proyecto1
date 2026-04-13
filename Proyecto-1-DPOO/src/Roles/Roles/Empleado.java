@@ -1,19 +1,15 @@
 package Roles;
 import BoardGame.Turno;
 
-public abstract class Empleado {
+public abstract class Empleado extends Usuario {
 	
 	//Atributos
-	
-    private String nombre;
-    private String idEmpleado;
     private Turno turno;
 
     //Constructor
     
-    public Empleado(String nombre, String idEmpleado, Turno turno) {
-        this.nombre = nombre;
-        this.idEmpleado = idEmpleado;
+    public Empleado(String nombre, String id, Turno turno, String login, String password) {
+    	super(id, nombre, login, password);
         this.turno = turno;
     }
     
@@ -24,7 +20,7 @@ public abstract class Empleado {
     }
 
     public String getIdEmpleado() {
-        return idEmpleado;
+        return super.getId();
     }
 
     public Turno getTurno() {
@@ -38,9 +34,9 @@ public abstract class Empleado {
     }	
 
     public void setIdEmpleado(String idEmpleado) {
-        if (idEmpleado != null) {
-            this.idEmpleado = idEmpleado;
-        }
+      
+            super.id = idEmpleado;
+      
     }
 
 	public void setTurno(Turno turno) {
@@ -48,7 +44,7 @@ public abstract class Empleado {
 	}
 
     public String mostrarInformacion() {
-        return "Empleado: " + nombre + " | ID: " + idEmpleado + " | Turno: " + turno;
+        return "Empleado: " + nombre + " | ID: " + id + " | Turno: " + turno;
     }
     
 
