@@ -85,8 +85,8 @@ public class Venta {
         this.porcentajePropina = porcentaje;
     }
 
-    @Override
-    public String toString() {
+
+    public String informacion() {
         return "Venta #" + idVenta +
                " | Fecha: " + fecha +
                " | Total: " + calcularTotal();
