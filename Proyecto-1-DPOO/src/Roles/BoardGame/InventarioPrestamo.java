@@ -5,7 +5,7 @@ import java.util.List;
 
 public class InventarioPrestamo {
 
-    
+	//Atributos
     private List<CopiaJuego> copias;
 
     // Constructor
