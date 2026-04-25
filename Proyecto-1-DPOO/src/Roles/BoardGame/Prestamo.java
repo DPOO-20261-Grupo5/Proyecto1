@@ -11,8 +11,6 @@ public class Prestamo {
     private Date fechaDevolucion;
     private boolean activo;
     private CopiaJuego copiaJuego;
-
-
     private static List<Prestamo> historial = new ArrayList<>();
 
     // Constructor

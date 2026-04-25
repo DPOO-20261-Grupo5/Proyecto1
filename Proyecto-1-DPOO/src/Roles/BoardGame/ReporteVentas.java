@@ -12,7 +12,6 @@ public class ReporteVentas {
 	private double ventasJuegos;
 	private double impuestosTotales;
 	private double propinasTotales;
-	
 	private List<Venta> ventas;
 	
 	// Constructor
