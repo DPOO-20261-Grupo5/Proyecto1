@@ -22,7 +22,7 @@ public class PruebasCliente {
 	@BeforeEach
 	public void setUp() {
         c1 = new Cliente(1111, "Antonio", "antonito123@uniandes.edu.co", "nublado");
-        b1 = new Bebida("JugoDeNaranja", 2500.0, false, false);
+        b1 = new Bebida("Jugo De Naranja", 2500.0, false, false);
         j1 = new Juego("Monopoly", 1987, "Hasbro", 2, 6, 3, "Tablero", false);
         cj1 = new CopiaJuego(1234, j1, "bueno");
         ip1 = new InventarioPrestamo();
