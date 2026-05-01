@@ -4,7 +4,7 @@ import BoardGame.Turno;
 
 public class Cocinero extends Empleado {
 
-    // Constructor correcto
+    // Constructor
     public Cocinero(String nombre, String id, Turno turno, String login, String password) {
         super(nombre, id, turno, login, password );
     }
