@@ -11,7 +11,7 @@ public class Mesero extends Empleado {
     // Atributos
     private List<Juego> juegosQuePuedeExplicar;
 
-    // Constructor correcto
+    // Constructor
     public Mesero(String nombre, String idEmpleado, Turno turno, String login, String password) {
         super(nombre, idEmpleado, turno, login, password);
         this.juegosQuePuedeExplicar = new ArrayList<>();
