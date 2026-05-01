@@ -4,7 +4,7 @@ import BoardGame.Turno;
 public abstract class Empleado extends Usuario {
 	
 	//Atributos
-    private Turno turno;
+    protected Turno turno;
 
     //Constructor
     
