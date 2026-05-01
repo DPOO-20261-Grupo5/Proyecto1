@@ -1,6 +1,6 @@
 package Roles;
 
-public class Usuario {
+public abstract class Usuario {
 	
 	//Atributos
     protected String id;

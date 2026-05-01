@@ -4,8 +4,8 @@ public abstract class Producto {
 	 
 	 //Atributos
 	
-     private String nombre;
-     private double precio;
+     protected String nombre;
+     protected double precio;
      
      //Constructor
      
