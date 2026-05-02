@@ -76,4 +76,9 @@ public class Cliente extends Usuario {
 	public List<Prestamo> getPrestamos(){
 		return this.prestamos;
 	}
+	
+	public List<Juego> getJuegosFavoritos(){
+		return this.juegosFavoritos;
+	}
 }
+

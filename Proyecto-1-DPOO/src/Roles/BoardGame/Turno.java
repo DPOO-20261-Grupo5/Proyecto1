@@ -47,6 +47,9 @@ public class Turno {
         return horaFin.getHour() - horaInicio.getHour();
     }
 
+    public boolean esMismoDia(LocalDate otraFecha) {
+        return this.fecha.equals(otraFecha);
+    }
     
     public String mostrarTurno() {
         return diaSemana + " | " + horaInicio + " - " + horaFin;
