@@ -51,7 +51,7 @@ public class PruebasMesero {
 	@DisplayName("Test puede explicar / Sin estar")
 	public void puedeExplicarSinEstarTest() {
 	    Juego j1 = new Juego("Monopoly", 1987, "Hasbro", 2, 6, 3, "Tablero", false);
-	    assertEquals(false, me1.puedeExplicar(j1), "Juego explicado sin saber");
+	    assertFalse(me1.puedeExplicar(j1), "Juego explicado sin saber");
 	}
 	
 	@Test
@@ -59,6 +59,6 @@ public class PruebasMesero {
 	public void puedeExplicarEstandoTest() {
 	    Juego j1 = new Juego("Monopoly", 1987, "Hasbro", 2, 6, 3, "Tablero", false);
 	    me1.agregarJuego(j1);
-	    assertEquals(true, me1.puedeExplicar(j1), "Juego no explicado sabiendo");
+	    assertTrue(me1.puedeExplicar(j1), "Juego no explicado sabiendo");
 	}
 }

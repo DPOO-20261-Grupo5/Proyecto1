@@ -82,7 +82,35 @@ public class Mesa {
         return this.numeroPersonas;
     }
     
+    public boolean getHayNinos() {
+    	return this.hayNinos;
+    }
+    
+    public boolean getHayMenores() {
+    	return this.hayMenores;
+    }
+    
     public int getCapacidad() {
     	return this.capacidad;
     }
+    
+    public List<Prestamo> getPrestamos() {
+    	return this.prestamos;
+    }
+    
+    public void setNumeroPersonas(int numeroPersonas) {
+    	this.numeroPersonas = numeroPersonas;
+    }
+    
+    public void setHayMenores(boolean hayMenores) {
+    	this.hayMenores = hayMenores;
+    }
+    
+    public void setHayNinos(boolean hayNinos) {
+    	this.hayNinos = hayNinos;
+    }
+
+	public List<Producto> getProductos() {
+		return this.productos;
+	}
 }

@@ -1,6 +1,8 @@
 package Pruebas;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -25,7 +27,7 @@ public class PruebasCopiaJuego {
 	public void prestadoEstandoDisponibleTest() {
 		int antes = cj1.getVecesPrestado();
 		cj1.prestado();
-		assertEquals(false, cj1.getDisponible(), "Prestado incorrectamente");
+		assertFalse(cj1.getDisponible(), "Prestado incorrectamente");
 		assertEquals(antes + 1, cj1.getVecesPrestado(), "Prestado incorrectamente");
 	}
 	
@@ -43,6 +45,6 @@ public class PruebasCopiaJuego {
 	public void devueltoTest() {
 		cj1.setDisponible(false);
 		cj1.devuelto();
-		assertEquals(true, cj1.getDisponible(), "Devuelto incorrectamente");
+		assertTrue(cj1.getDisponible(), "Devuelto incorrectamente");
 	}
 }
