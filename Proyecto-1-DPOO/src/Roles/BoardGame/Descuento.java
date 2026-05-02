@@ -40,7 +40,7 @@ public class Descuento {
 
 
     public double getValor() {
-        return valor;
+        return this.valor;
     }
 
 

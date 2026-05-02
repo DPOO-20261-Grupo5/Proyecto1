@@ -2,6 +2,7 @@ package Roles;
 import java.util.ArrayList;
 import java.util.List;
 
+import BoardGame.Descuento;
 import BoardGame.Juego;
 import BoardGame.Mesa;
 import BoardGame.Prestamo;
@@ -16,6 +17,7 @@ public class Cliente extends Usuario {
 	private Mesa mesa;
 	private List<Venta> ventas;
 	private List<Juego> juegosFavoritos;
+	private List<Descuento> descuentos;
 	
 	
 	//Constructor
@@ -26,6 +28,7 @@ public class Cliente extends Usuario {
 		this.juegosFavoritos = new ArrayList<Juego>();
 		this.mesa = null;
 		this.ventas = new ArrayList<Venta>();
+		this.descuentos = new ArrayList<Descuento>();
 	}
 	
 	//Metodos
@@ -80,5 +83,26 @@ public class Cliente extends Usuario {
 	public List<Juego> getJuegosFavoritos(){
 		return this.juegosFavoritos;
 	}
+	
+	public void agregarDescuento(Descuento descuento) {
+	    if (descuento != null) {
+	        descuentos.add(descuento);
+	    }
+	   
+	}
+	
+	public List<Descuento> getDescuentos() {
+	    return this.descuentos;
+	}
+	
+	public Descuento obtenerDescuentoDisponible() {
+	    for (Descuento d : descuentos) {
+	        if (!d.estaUsado()) {
+	            return d;
+	        }
+	    }
+	    return null;
+	}
+	
 }
 

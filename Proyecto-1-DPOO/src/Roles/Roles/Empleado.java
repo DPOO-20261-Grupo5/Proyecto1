@@ -1,5 +1,5 @@
 package Roles;
-import java.time.LocalDate;
+
 
 import BoardGame.Turno;
 
@@ -45,7 +45,7 @@ public abstract class Empleado extends Usuario {
 		this.turno = turno;
 	}
 	
-	public boolean tieneTurno(LocalDate fecha) {
+	public boolean tieneTurno(String fecha) {
 	    return turno != null && turno.esMismoDia(fecha);
 	}
 
