@@ -100,6 +100,99 @@ public class PruebasVenta {
 
 	    assertEquals(esperado, v1.calcularImpuestos(), 0.001);
 	}
+	
+	@Test
+	@DisplayName("Calcular propina con valor 10%")
+	public void calcularPropinaTest() {
+
+	    Producto bebida = new Bebida("Cafe", 1000.0, false, false);
+	    ItemVenta item = new ItemVenta(bebida, 2, 1000.0); 
+
+	    v1.agregarItem(item);
+
+	    double esperado = 2000 * 0.10; 
+
+	    assertEquals(esperado, v1.calcularPropina(), 0.001);
+	}
+	
+	@Test
+	@DisplayName("Calcular propina con porcentaje personalizado")
+	public void calcularPropinaPersonalizadaTest() {
+
+
+	    Producto bebida = new Bebida("Jugo", 2000.0, false, false);
+	    ItemVenta item = new ItemVenta(bebida, 1, 2000.0); 
+
+	    v1.agregarItem(item);
+
+	    v1.setPorcentajePropina(0.20); 
+
+	    double esperado = 2000 * 0.20; 
+
+	    assertEquals(esperado, v1.calcularPropina(), 0.001);
+	}
+	
+	@Test
+	@DisplayName("Calcular total completo")
+	public void calcularTotalTest() {
+
+	    Producto bebida = new Bebida("Cafe", 1000.0, false, false);
+	    ItemVenta item = new ItemVenta(bebida, 2, 1000.0); 
+
+	    v1.agregarItem(item);
+
+	    double subtotal = 2000;
+	    double impuestos = 2000 * 0.08; 
+	    double propina = 2000 * 0.10;   
+
+	    double esperado = subtotal + impuestos + propina; 
+
+	    assertEquals(esperado, v1.calcularTotal(), 0.001);
+	}
+	
+	@Test
+	@DisplayName("Calcular total con productos mixtos")
+	public void calcularTotalMixtoTest() {
+	    
+
+	    // Bebida 8%
+	    Producto bebida = new Bebida("Jugo", 1000.0, false, false);
+	    ItemVenta item1 = new ItemVenta(bebida, 2, 1000.0); // 2000
+
+	    // Juego 19%
+	    Juego j1 = new Juego("Catan", 2000, "Marca", 2, 4, 3, "Tablero", false);
+	    Producto juego = new JuegoVenta(j1, 5000.0, 3);
+	    ItemVenta item2 = new ItemVenta(juego, 1, 5000.0); 
+
+	    v1.agregarItem(item1);
+	    v1.agregarItem(item2);
+
+	    double subtotal = 2000 + 5000; 
+	    double impuestos = (2000 * 0.08) + (5000 * 0.19); 
+	    double propina = 7000 * 0.10; 
+
+	    double esperado = subtotal + impuestos + propina; 
+
+	    assertEquals(esperado, v1.calcularTotal(), 0.001);
+	}
+	
+	@Test
+	@DisplayName("Calcular puntos básico")
+	public void calcularPuntosTest() {
+	   
+
+	    Producto bebida = new Bebida("Cafe", 1000.0, false, false);
+	    ItemVenta item = new ItemVenta(bebida, 2, 1000.0); 
+
+	    v1.agregarItem(item);
+
+	    
+	    double total = v1.calcularTotal();
+
+	    int esperado = (int) (total * 0.01);
+
+	    assertEquals(esperado, v1.calcularPuntos());
+	}
 }
 
 

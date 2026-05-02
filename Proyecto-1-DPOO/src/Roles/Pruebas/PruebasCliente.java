@@ -55,4 +55,6 @@ public class PruebasCliente {
         c1.agregarPrestamo(pre1);
         assertEquals(1, c1.getPrestamos().size());
 	}
+	
+	
 }
