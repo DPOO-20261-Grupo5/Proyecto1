@@ -97,7 +97,7 @@ public class PruebasAdministrador {
 	@DisplayName("Prueba Reporte Ventas")
 	public void generarReporteTest() {
 	  
-	    Venta v1 = new Venta(1, new Date());
+		Venta v1 = new Venta(001,  LocalDate.of(2025, 12, 11));
 	    List<Venta> ventas = new ArrayList<>();
 	    ventas.add(v1);
 
