@@ -46,7 +46,7 @@ public class InventarioVenta {
     public void venderJuego(String nombre, int cantidad) {
         JuegoVenta jv = buscarJuego(nombre);
 
-        if (jv != null && jv.getStockDisponible() >= cantidad) {
+        if (hayStock(nombre, cantidad)) {
             jv.reducirStock(cantidad);
         } else {
             System.out.println("No hay stock suficiente");
