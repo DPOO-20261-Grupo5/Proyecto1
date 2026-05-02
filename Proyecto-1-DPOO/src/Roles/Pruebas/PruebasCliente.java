@@ -2,9 +2,7 @@ package Pruebas;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDate;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -12,7 +10,9 @@ import org.junit.jupiter.api.Test;
 
 import BoardGame.CopiaJuego;
 import BoardGame.Juego;
+import BoardGame.Mesa;
 import BoardGame.Prestamo;
+import BoardGame.Venta;
 import Roles.Cliente;
 
 public class PruebasCliente {
@@ -22,39 +22,110 @@ public class PruebasCliente {
 	@BeforeEach
 	public void setUp() {
         c1 = new Cliente(1111, "Antonio", "antonito123@uniandes.edu.co", "nublado");
-        b1 = new Bebida("Jugo De Naranja", 2500.0, false, false);
-        j1 = new Juego("Monopoly", 1987, "Hasbro", 2, 6, 3, "Tablero", false);
-        cj1 = new CopiaJuego(1234, j1, "bueno");
-        ip1 = new InventarioPrestamo();
-        iv1 = new InventarioVenta();
-        pro1 = new Producto("Pastel", 3000.0);
-        itv1 = new ItemVenta(pro1, 10, 3000.0);
-        jv1 = new JuegoVenta(j1, 20000.0, 3);
-        m1 = new Mesa(1, 4, 2, false, false);
-        pas1 = new Pasteleria("Tres leches", 4500.0);
-        pla1 = new Platillo("Flan", 5000.0);
-        pre1 = new Prestamo(01, new LocalDate.of(2025, 5, 28), cj1);
-        v1 = new Venta(001, new LocalDate.of(2025, 12, 11));
-        rv1 = new ReporteVentas(new LocalDate.of(2024, 5, 6), new LocalDate.of(2024, 5, 8), new ArrayList<Venta>(v1));
-        sct1 = new SolicitudCambioTurno(123, e1, t1, t2, "intercambio");
-        t1 = new Turno("lunes", LocalTime.of(6, 0), LocalTime.of(20, 0));
-        t2 = new Turno("martes", LocalTime.of(6, 0), LocalTime.of(20, 0));
-        a1 = new Administrador("Jorge", "0001", t1, "jorgito123@uniandes.edu.co", "soleado");
-        co1 = new Cocinero("Henry", "002", t2, "henrysito123@uniandes.edu.co", "nevado");
-        e1 = new Empleado("Camiquin", "003", t1, "camiquinsita123@uniandes.edu.co", "lluvioso");
-        me1 = new Mesero("Juanfe", "004", t2, "juanfesito123@uniandes.edu.co", "templado");
-        u1 = new Usuario("005", "Andres", "andresito123@uniandes.edu.co", "seco");
     }
 	
 	@Test
-	@DisplayName("Test agregar préstamo")
-	public void agregarPrestamoTest() {
+	@DisplayName("Test agregar préstamo / Préstamos menor a 2")
+	public void agregarPrestamoMenorA2Test() {
 		Juego j1 = new Juego("Monopoly", 1987, "Hasbro", 2, 6, 3, "Tablero", false);
 		CopiaJuego cj1 = new CopiaJuego(1234, j1, "bueno");
-        Prestamo pre1 = new Prestamo(1, new Date(), cj1);
+        Prestamo pre1 = new Prestamo(1, LocalDate.of(2025, 12, 11), cj1);
         c1.agregarPrestamo(pre1);
-        assertEquals(1, c1.getPrestamos().size());
+        assertEquals(1, c1.getPrestamos().size(), "Préstamo agregado incorrectamente");
 	}
 	
+	@Test
+	@DisplayName("Test agregar préstamo / Préstamos 2 o más")
+	public void agregarPrestamo2OMasTest() {
+		Juego j1 = new Juego("Monopoly", 1987, "Hasbro", 2, 6, 3, "Tablero", false);
+		CopiaJuego cj1 = new CopiaJuego(1234, j1, "bueno");
+        Prestamo pre1 = new Prestamo(1, LocalDate.of(2025, 12, 11), cj1);
+        Juego j2 = new Juego("Uno", 1983, "Hasbro", 2, 6, 3, "Cartas", false);
+		CopiaJuego cj2 = new CopiaJuego(1324, j2, "bueno");
+        Prestamo pre2 = new Prestamo(2, LocalDate.of(2025, 11, 12), cj2);
+        Juego j3 = new Juego("Risk", 1984, "Hasbro", 2, 4, 6, "Tablero", true);
+		CopiaJuego cj3 = new CopiaJuego(1342, j3, "bueno");
+        Prestamo pre3 = new Prestamo(3, LocalDate.of(2025, 11, 12), cj3);
+        c1.agregarPrestamo(pre1);
+        c1.agregarPrestamo(pre2);
+        c1.agregarPrestamo(pre3);
+        assertEquals(2, c1.getPrestamos().size(), "Préstamo agregado incorrectamente");
+	}
 	
+	@Test
+	@DisplayName("Test devolver préstamo / Si está")
+	public void devolverPrestamoSiEstaTest() {
+		Juego j1 = new Juego("Monopoly", 1987, "Hasbro", 2, 6, 3, "Tablero", false);
+		CopiaJuego cj1 = new CopiaJuego(1234, j1, "bueno");
+        Prestamo pre1 = new Prestamo(1, LocalDate.of(2025, 12, 11), cj1);
+        c1.agregarPrestamo(pre1);
+        c1.devolverPrestamo(pre1);
+        assertEquals(0, c1.getPrestamos().size(), "Préstamo devuelto incorrectamente");
+	}
+	
+	@Test
+	@DisplayName("Test devolver préstamo / No está")
+	public void devolverPrestamoNoEstaTest() {
+		Juego j1 = new Juego("Monopoly", 1987, "Hasbro", 2, 6, 3, "Tablero", false);
+		CopiaJuego cj1 = new CopiaJuego(1234, j1, "bueno");
+        Prestamo pre1 = new Prestamo(1, LocalDate.of(2025, 12, 11), cj1);
+        c1.devolverPrestamo(pre1);
+        assertEquals(0, c1.getPrestamos().size(), "Préstamo devuelto incorrectamente");
+	}
+	
+	@Test
+	@DisplayName("Test asignar mesa")
+	public void asignarMesaTest() {
+		Mesa m1 = new Mesa(1, 4, 2, false, false);
+		c1.asignarMesa(m1);
+        assertEquals(m1, c1.getMesa(), "Mesa asignada incorrectamente");
+	}
+	
+	@Test
+	@DisplayName("Test liberar mesa / Asignada")
+	public void liberarMesaAsignadaTest() {
+		Mesa m1 = new Mesa(1, 4, 2, false, false);
+		c1.asignarMesa(m1);
+		c1.liberarMesa();
+        assertEquals(null, c1.getMesa(), "Mesa liberada incorrectamente");
+	}
+	
+	@Test
+	@DisplayName("Test liberar mesa / Sin asignar")
+	public void liberarMesaSinAsignarTest() {
+		c1.liberarMesa();
+        assertEquals(null, c1.getMesa(), "Mesa liberada incorrectamente");
+	}
+	
+	@Test
+	@DisplayName("Test agregar venta")
+	public void agregarVentaTest() {
+		Venta v1 = new Venta(001, LocalDate.of(2025, 12, 11));
+		c1.agregarVenta(v1);
+        assertEquals(1, c1.getVentas().size(), "Venta agregada incorrectamente");
+	}
+	
+	@Test
+	@DisplayName("Test agregar juego favorito / Sin estar")
+	public void agregarJuegoFavoritoSinEstarTest() {
+		Juego j1 = new Juego("Monopoly", 1987, "Hasbro", 2, 6, 3, "Tablero", false);
+		c1.agregarJuegoFavorito(j1);
+        assertEquals(1, c1.getJuegosFavoritos().size(), "Juego favorito agregado incorrectamente");
+	}
+	
+	@Test
+	@DisplayName("Test agregar juego favorito / Estando")
+	public void agregarJuegoFavoritoEstandoTest() {
+		Juego j1 = new Juego("Monopoly", 1987, "Hasbro", 2, 6, 3, "Tablero", false);
+		c1.agregarJuegoFavorito(j1);
+		c1.agregarJuegoFavorito(j1);
+        assertEquals(1, c1.getJuegosFavoritos().size(), "Juego favorito agregado incorrectamente");
+	}
+	
+	@Test
+	@DisplayName("Test acumular puntos")
+	public void acumularPuntosTest() {
+		c1.acumularPuntos(50500.0);
+        assertEquals(505, c1.getPuntosFidelidad(), "Puntos acumulados incorrectamente");
+	}
 }

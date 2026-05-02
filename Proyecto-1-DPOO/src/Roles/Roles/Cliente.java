@@ -38,6 +38,10 @@ public class Cliente extends Usuario {
 		return this.mesa;
 	}
 	
+	public List<Venta> getVentas() {
+		return this.ventas;
+	}
+	
 	public void agregarPrestamo(Prestamo prestamo) {
 	    if (prestamos.size() < 2) {
 	        prestamos.add(prestamo);
