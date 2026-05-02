@@ -1,6 +1,6 @@
 package BoardGame;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
@@ -9,12 +9,12 @@ public class Venta {
 
     // Atributos
     private int idVenta;
-    private Date fecha;
+    private LocalDate fecha;
     private List<ItemVenta> items;
     private double porcentajePropina; 
 
     // Constructor
-    public Venta(int idVenta, Date fecha) {
+    public Venta(int idVenta, LocalDate fecha) {
         this.idVenta = idVenta;
         this.fecha = fecha;
         this.items = new ArrayList<>();
@@ -72,7 +72,7 @@ public class Venta {
         return this.idVenta;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return this.fecha;
     }
 
