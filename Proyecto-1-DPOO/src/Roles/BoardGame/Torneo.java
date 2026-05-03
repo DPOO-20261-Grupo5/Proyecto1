@@ -1,6 +1,6 @@
 package BoardGame;
 
-import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +9,7 @@ import Roles.Cliente;
 import Roles.Empleado;
 import Roles.Usuario;
 
+
 public class Torneo {
 
     public static final String AMISTOSO = "AMISTOSO";
@@ -16,7 +17,7 @@ public class Torneo {
 
     // Atributos
     private int id;
-    private LocalDate fecha;
+    private String fecha;
     private String tipo;
     private int capacidadMaxima;
     private Juego juego;
@@ -24,7 +25,7 @@ public class Torneo {
     private List<Inscripcion> inscritos;
 
     // Constructor
-    public Torneo(int id, LocalDate fecha, String tipo, int capacidadMaxima, Juego juego, Administrador admin) {
+    public Torneo(int id, String fecha, String tipo, int capacidadMaxima, Juego juego, Administrador admin) {
         this.id = id;
         this.fecha = fecha;
         this.tipo = tipo;
@@ -49,7 +50,14 @@ public class Torneo {
             throw new Exception("Máximo 3 cupos por usuario");
         }
 
-        
+        // Evitar doble inscripción
+        for (Inscripcion i : inscritos) {
+            if (i.getUsuario().equals(usuario)) {
+                throw new Exception("El usuario ya está inscrito");
+            }
+        }
+
+        // Validar empleados
         if (usuario instanceof Empleado) {
             Empleado emp = (Empleado) usuario;
             if (emp.tieneTurno(fecha)) {
@@ -98,7 +106,7 @@ public class Torneo {
     public void otorgarPremio(Cliente ganador) {
 
         if (tipo.equals(AMISTOSO)) {
-            Descuento d = new Descuento(10.0, false);
+            Descuento d = new Descuento(10.0);
             ganador.agregarDescuento(d);
         }
 
@@ -110,18 +118,18 @@ public class Torneo {
 
 
     public String getTipo() {
-        return tipo;
+        return this.tipo;
     }
 
     public Juego getJuego() {
-        return juego;
+        return this.juego;
     }
 
-    public LocalDate getFecha() {
-        return fecha;
+    public String getFecha() {
+        return this.fecha;
     }
 
     public List<Inscripcion> getInscritos() {
-        return inscritos;
+        return this.inscritos;
     }
 }

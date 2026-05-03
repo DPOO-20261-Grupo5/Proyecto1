@@ -48,8 +48,8 @@ public class Turno {
         return horaFin.getHour() - horaInicio.getHour();
     }
 
-    public boolean esMismoDia(LocalDate otraFecha) {
-        return this.fecha.equals(otraFecha);
+    public boolean esMismoDia(String otraFecha) {
+        return this.diaSemana.equals(otraFecha);
     }
     
     public String mostrarTurno() {
