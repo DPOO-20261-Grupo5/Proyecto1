@@ -9,6 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import BoardGame.CopiaJuego;
+import BoardGame.Descuento;
 import BoardGame.Juego;
 import BoardGame.Mesa;
 import BoardGame.Prestamo;
@@ -127,5 +128,43 @@ public class PruebasCliente {
 	public void acumularPuntosTest() {
 		c1.acumularPuntos(50500.0);
         assertEquals(505, c1.getPuntosFidelidad(), "Puntos acumulados incorrectamente");
+	}
+	
+	@Test
+	@DisplayName("Test agregar descuento / Descuento nulo")
+	public void agregarDescuentoNuloTest() {
+		c1.agregarDescuento(null);
+        assertEquals(0, c1.getDescuentos().size(), "Descuento agregado incorrectamente");
+	}
+	
+	@Test
+	@DisplayName("Test agregar descuento / Con descuento")
+	public void agregarDescuentoConTest() {
+		Descuento d1 = new Descuento(300.0);
+		c1.agregarDescuento(d1);
+        assertEquals(1, c1.getDescuentos().size(), "Descuento agregado incorrectamente");
+	}
+	
+	@Test
+	@DisplayName("Test obtener descuento disponible / Sin descuentos")
+	public void obtenerDescuentoDisponibleSinDescuentosTest() {
+        assertEquals(null, c1.obtenerDescuentoDisponible(), "Descuento obtenido incorrectamente");
+	}
+	
+	@Test
+	@DisplayName("Test obtener descuento disponible / Con descuento usado")
+	public void obtenerDescuentoDisponibleConDescuentoUsadoTest() {
+		Descuento d1 = new Descuento(300.0);
+		d1.usar();
+		c1.agregarDescuento(d1);
+        assertEquals(null, c1.obtenerDescuentoDisponible(), "Descuento obtenido incorrectamente");
+	}
+	
+	@Test
+	@DisplayName("Test obtener descuento disponible / Con descuento sin usar")
+	public void obtenerDescuentoDisponibleConDescuentoSinUsarTest() {
+		Descuento d1 = new Descuento(300.0);
+		c1.agregarDescuento(d1);
+        assertEquals(d1, c1.obtenerDescuentoDisponible(), "Descuento obtenido incorrectamente");
 	}
 }
