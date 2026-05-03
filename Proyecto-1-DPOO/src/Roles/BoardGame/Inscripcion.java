@@ -22,7 +22,8 @@ public class Inscripcion {
 
     public void setCantidadCupos(int cantidadCupos) {
         if (cantidadCupos <= 0 || cantidadCupos > 3) {
-            throw new IllegalArgumentException("Un usuario solo puede inscribir entre 1 y 3 cupos");
+            System.out.println("Un usuario solo puede inscribir entre 1 y 3 cupos");
+            return;
         }
         this.cantidadCupos = cantidadCupos;
     }
@@ -60,7 +61,8 @@ public class Inscripcion {
         int nuevoTotal = this.cantidadCupos - cantidad;
 
         if (nuevoTotal <= 0) {
-            throw new IllegalArgumentException("No puedes dejar la inscripción en 0 cupos");
+            System.out.println("No puedes dejar la inscripción en 0 cupos");
+            return;
         }
 
         this.cantidadCupos = nuevoTotal;
