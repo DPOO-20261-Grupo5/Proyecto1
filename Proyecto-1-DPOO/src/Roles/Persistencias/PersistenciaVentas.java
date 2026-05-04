@@ -1,8 +1,8 @@
 package Persistencias;
 	
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import BoardGame.Venta;
@@ -25,7 +25,7 @@ public class PersistenciaVentas {
             for (Venta v : ventas) {
                 writer.write(
                     v.getIdVenta() + "," +
-                    v.getFecha().getTime() + "," +  
+                    v.getFecha().toString() + "," +
                     v.calcularTotal() + "\n"
                 );
             }
@@ -37,8 +37,8 @@ public class PersistenciaVentas {
             e.printStackTrace();
         }
     }
-    //Cargar ventas
 
+    // Cargar ventas
     public static List<Venta> cargarVentas() {
 
         List<Venta> ventas = new ArrayList<>();
@@ -58,13 +58,9 @@ public class PersistenciaVentas {
                 String[] partes = linea.split(",");
 
                 int id = Integer.parseInt(partes[0]);
-                long fechaMillis = Long.parseLong(partes[1]);
-
-                Date fecha = new Date(fechaMillis);
+                LocalDate fecha = LocalDate.parse(partes[1]);
 
                 Venta v = new Venta(id, fecha);
-
-               
 
                 ventas.add(v);
             }
