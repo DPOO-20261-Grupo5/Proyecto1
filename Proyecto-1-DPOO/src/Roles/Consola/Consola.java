@@ -1,6 +1,6 @@
 package Consola;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
@@ -25,7 +25,7 @@ public class Consola {
 
     public static void main(String[] args) {
 
-        // Inicializar datos
+
         inventarioPrestamo.agregarCopia(new CopiaJuego(1, catan, "bueno"));
         inventarioVenta.agregarJuegoVenta(new JuegoVenta(catan, 5, 120000));
 
@@ -47,7 +47,7 @@ public class Consola {
         }
     }
 
-    // ================= CLIENTE =================
+    // CLIENTE 
     private static void menuCliente() {
 
         int op = 0;
@@ -85,7 +85,7 @@ public class Consola {
                     mesaActual.puedeRecibirJuego(catan)) {
 
                     CopiaJuego copia = inventarioPrestamo.buscarDisponibles(catan).get(0);
-                    Prestamo p = new Prestamo(1, new Date(), copia);
+                    Prestamo p = new Prestamo(1, LocalDate.now(), copia);
 
                     copia.prestado();
                     clienteActual.agregarPrestamo(p);
@@ -99,7 +99,7 @@ public class Consola {
 
             else if (op == 4) {
 
-                Venta venta = new Venta(ventas.size() + 1, new Date());
+            	Venta venta = new Venta(ventas.size() + 1, LocalDate.now());
                 Bebida cafe = new Bebida("Café", 5000, false, true);
 
                 if (mesaActual.puedeConsumirBebida(cafe)) {
@@ -116,7 +116,7 @@ public class Consola {
             else if (op == 5) {
                 if (!clienteActual.getPrestamos().isEmpty()) {
                     Prestamo p = clienteActual.getPrestamos().get(0);
-                    p.devolver(new Date());
+                    p.devolver(LocalDate.now());
                     p.getCopiaJuego().devuelto();
                     clienteActual.devolverPrestamo(p);
                     System.out.println("Devuelto.");
@@ -125,7 +125,7 @@ public class Consola {
         }
     }
 
-    // ================= EMPLEADO =================
+    // EMPLEADO
     private static void menuEmpleado() {
 
         int op = 0;
@@ -158,7 +158,7 @@ public class Consola {
         }
     }
 
-    // ================= ADMIN =================
+    // ADMIN
     private static void menuAdministrador() {
 
         int op = 0;
