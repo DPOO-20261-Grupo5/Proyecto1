@@ -16,7 +16,8 @@ public class Descuento {
     public double aplicarDescuento(double totalCompra) {
 
         if (usado) {
-            throw new IllegalStateException("El descuento ya fue usado");
+            System.out.println("El descuento ya fue usado");
+            return totalCompra;
         }
 
         double totalFinal = totalCompra - valor;

@@ -85,7 +85,12 @@ public class Torneo {
 
 
     public void desinscribir(Usuario usuario) {
-        inscritos.removeIf(i -> i.getUsuario().equals(usuario));
+        for (int i = 0; i < inscritos.size(); i++) {
+            if (inscritos.get(i).getUsuario().equals(usuario)) {
+                inscritos.remove(i);
+                i--;
+            }
+        }
     }
 
 
@@ -98,18 +103,21 @@ public class Torneo {
     }
 
     public int calcularCuposFanaticos() {
-        return (int) Math.ceil(capacidadMaxima * 0.2);
+        double valor = capacidadMaxima * 0.2;
+        int entero = (int) valor;
+        if (valor > entero) {
+            entero++;
+        }
+        return entero;
     }
 
 
 
     public void otorgarPremio(Cliente ganador) {
-
         if (tipo.equals(AMISTOSO)) {
             Descuento d = new Descuento(10.0);
             ganador.agregarDescuento(d);
         }
-
         if (tipo.equals(COMPETITIVO)) {
             System.out.println("Premio monetario (externo)");
         }

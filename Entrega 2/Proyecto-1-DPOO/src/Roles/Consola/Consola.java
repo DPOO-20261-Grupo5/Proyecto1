@@ -1,135 +1,203 @@
 package Consola;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import Persistencias.*;
+import java.util.Scanner;
+
 import BoardGame.*;
 import Roles.Cliente;
+import Persistencias.*;
 
 public class Consola {
 
+    private static Scanner scanner = new Scanner(System.in);
+
+    private static List<Cliente> clientes = PersistenciaClientes.cargarClientes();
+    private static List<Venta> ventas = PersistenciaVentas.cargarVentas();
+
+    private static InventarioPrestamo inventarioPrestamo = new InventarioPrestamo();
+    private static InventarioVenta inventarioVenta = new InventarioVenta();
+
+    private static Cliente clienteActual;
+    private static Mesa mesaActual;
+
+    private static Juego catan = new Juego("Catan", 1995, "Kosmos", 3, 4, 10, "Tablero", false);
+
     public static void main(String[] args) {
-    	
-    	List<Cliente> clientes = PersistenciaClientes.cargarClientes();
-    	List<Venta> ventas = PersistenciaVentas.cargarVentas();
-    	List<CopiaJuego> copias = PersistenciaJuegos.cargarJuegosPrestamo();
-    	List<JuegoVenta> juegosVenta = PersistenciaJuegos.cargarJuegosVenta();
 
-        System.out.println("=== INICIO SIMULACIÓN BOARD GAME CAFE ===\n");
+        // Inicializar datos
+        inventarioPrestamo.agregarCopia(new CopiaJuego(1, catan, "bueno"));
+        inventarioVenta.agregarJuegoVenta(new JuegoVenta(catan, 5, 120000));
 
-       
-        // 1. INVENTARIO PRÉSTAMO
-        
-        InventarioPrestamo inventarioPrestamo = new InventarioPrestamo();
+        int opcion = 0;
 
-        Juego catan = new Juego("Catan", 1995, "Kosmos", 3, 4, 10, "Tablero", false);
-        CopiaJuego copia1 = new CopiaJuego(01, catan, "bueno");
-        CopiaJuego copia2 = new CopiaJuego(02, catan, "bueno");
+        while (opcion != 4) {
 
-        inventarioPrestamo.agregarCopia(copia1);
-        inventarioPrestamo.agregarCopia(copia2);
+            System.out.println("\n=== BOARD GAME CAFÉ ===");
+            System.out.println("1. Cliente");
+            System.out.println("2. Empleado");
+            System.out.println("3. Administrador");
+            System.out.println("4. Salir");
 
-        System.out.println("Inventario de préstamo inicializado\n");
+            opcion = Integer.parseInt(scanner.nextLine());
 
-       
-        // 2. CLIENTE Y MESA
-      
-        Cliente cliente = new Cliente(1, "Juan", "juan123", "1234");
-
-        Mesa mesa = new Mesa(1, 4, 3, false, true); 
-        cliente.asignarMesa(mesa);
-
-        System.out.println("Cliente asignado a mesa\n");
-
-      
-        // 3. VALIDAR Y HACER PRÉSTAMO
-      
-        if (inventarioPrestamo.hayDisponible(catan) &&
-            catan.esAptoPara(mesa.getNumeroPersonas(), 15)) {
-
-            CopiaJuego copiaDisponible = inventarioPrestamo.buscarDisponibles(catan).get(0);
-
-            Prestamo prestamo = new Prestamo(1, new Date(), copiaDisponible);
-            copiaDisponible.prestado();
-            cliente.agregarPrestamo(prestamo);
-
-            System.out.println("Préstamo realizado: " + catan.getNombre());
-        } else {
-            System.out.println("No se puede realizar el préstamo");
+            if (opcion == 1) menuCliente();
+            else if (opcion == 2) menuEmpleado();
+            else if (opcion == 3) menuAdministrador();
         }
+    }
 
-       
-        // 4. INVENTARIO VENTA
-       
-        InventarioVenta inventarioVenta = new InventarioVenta();
+    // ================= CLIENTE =================
+    private static void menuCliente() {
 
-        JuegoVenta juegoVenta = new JuegoVenta(catan, 5, 120000);
-        inventarioVenta.agregarJuegoVenta(juegoVenta);
+        int op = 0;
 
-        System.out.println("\nInventario de venta inicializado");
+        while (op != 6) {
 
-        
-        // 5. CREAR PRODUCTOS
-        
-        Bebida cafe = new Bebida("Café", 5000, false, true);
-        Pasteleria torta = new Pasteleria("Torta", 8000);
+            System.out.println("\n=== CLIENTE ===");
+            System.out.println("1. Crear cliente");
+            System.out.println("2. Asignar mesa");
+            System.out.println("3. Prestar juego");
+            System.out.println("4. Comprar");
+            System.out.println("5. Devolver juego");
+            System.out.println("6. Volver");
 
-       
-        // 6. CREAR VENTA
-        
-        Venta venta = new Venta(1, new Date());
+            op = Integer.parseInt(scanner.nextLine());
 
-        ItemVenta item1 = new ItemVenta(cafe, 2, cafe.getPrecio());
-        ItemVenta item2 = new ItemVenta(torta, 1, torta.getPrecio());
-        ItemVenta item3 = new ItemVenta(juegoVenta, 1, juegoVenta.getPrecio());
+            if (op == 1) {
+                System.out.print("Nombre: ");
+                String nombre = scanner.nextLine();
+                clienteActual = new Cliente(1, nombre, "login", "123");
+                clientes.add(clienteActual);
+                System.out.println("Cliente creado.");
+            }
 
-        venta.agregarItem(item1);
-        venta.agregarItem(item2);
-        venta.agregarItem(item3);
+            else if (op == 2) {
+                mesaActual = new Mesa(1, 4, 3, false, true);
+                clienteActual.asignarMesa(mesaActual);
+                System.out.println("Mesa asignada.");
+            }
 
-        cliente.agregarVenta(venta);
-        ventas.add(venta);
-        System.out.println("\nVenta realizada:");
-        System.out.println("Subtotal: " + venta.calcularSubtotal());
-        System.out.println("Impuestos: " + venta.calcularImpuestos());
-        System.out.println("Propina: " + venta.calcularPropina());
-        System.out.println("TOTAL: " + venta.calcularTotal());
+            else if (op == 3) {
 
-        
-        // 7. PUNTOS FIDELIDAD
-        
-        cliente.acumularPuntos(venta.calcularTotal());
+                if (clienteActual.getPrestamos().size() < 2 &&
+                    inventarioPrestamo.hayDisponible(catan) &&
+                    mesaActual.puedeRecibirJuego(catan)) {
 
-        System.out.println("\nPuntos acumulados: " + cliente.getPuntosFidelidad());
+                    CopiaJuego copia = inventarioPrestamo.buscarDisponibles(catan).get(0);
+                    Prestamo p = new Prestamo(1, new Date(), copia);
 
-        
-        // 8. DEVOLVER JUEGO
-     
-        Prestamo prestamo = cliente.getPrestamos().get(0);
-        prestamo.devolver(new Date());
-        copia1.devuelto();
-        cliente.devolverPrestamo(prestamo);
+                    copia.prestado();
+                    clienteActual.agregarPrestamo(p);
+                    mesaActual.agregarPrestamo(p);
 
-        System.out.println("\nJuego devuelto correctamente");
+                    System.out.println("Juego prestado.");
+                } else {
+                    System.out.println("No se puede prestar.");
+                }
+            }
 
-       
-        // 9. REPORTE DE VENTAS
-       
-        List<Venta> ventass = new ArrayList<>();
-        ventass.add(venta);
+            else if (op == 4) {
 
-        ReporteVentas reporte = new ReporteVentas(
-                java.time.LocalDate.now().minusDays(1),
-                java.time.LocalDate.now(),
-                ventass
-        );
+                Venta venta = new Venta(ventas.size() + 1, new Date());
+                Bebida cafe = new Bebida("Café", 5000, false, true);
 
-        System.out.println("\n" + reporte.mostrarReporte());
-        PersistenciaClientes.guardarClientes(clientes);
-        PersistenciaVentas.guardarVentas(ventas);
-        PersistenciaJuegos.guardarJuegosPrestamo(copias);
-        PersistenciaJuegos.guardarJuegosVenta(juegosVenta);
-        System.out.println("\n=== FIN SIMULACIÓN ===");
+                if (mesaActual.puedeConsumirBebida(cafe)) {
+                    venta.agregarItem(new ItemVenta(cafe, 1, cafe.getPrecio()));
+                    ventas.add(venta);
+                    clienteActual.acumularPuntos(venta.calcularTotal());
+
+                    System.out.println("Total: " + venta.calcularTotal());
+                } else {
+                    System.out.println("No permitido.");
+                }
+            }
+
+            else if (op == 5) {
+                if (!clienteActual.getPrestamos().isEmpty()) {
+                    Prestamo p = clienteActual.getPrestamos().get(0);
+                    p.devolver(new Date());
+                    p.getCopiaJuego().devuelto();
+                    clienteActual.devolverPrestamo(p);
+                    System.out.println("Devuelto.");
+                }
+            }
+        }
+    }
+
+    // ================= EMPLEADO =================
+    private static void menuEmpleado() {
+
+        int op = 0;
+
+        while (op != 4) {
+
+            System.out.println("\n=== EMPLEADO ===");
+            System.out.println("1. Ver turno");
+            System.out.println("2. Solicitar cambio");
+            System.out.println("3. Pedir juego");
+            System.out.println("4. Volver");
+
+            op = Integer.parseInt(scanner.nextLine());
+
+            if (op == 1) {
+                System.out.println("Turno: Lunes 8am-5pm");
+            }
+
+            else if (op == 2) {
+                System.out.println("Solicitud enviada.");
+            }
+
+            else if (op == 3) {
+                if (inventarioPrestamo.hayDisponible(catan)) {
+                    CopiaJuego copia = inventarioPrestamo.buscarDisponibles(catan).get(0);
+                    copia.prestado();
+                    System.out.println("Juego prestado al empleado.");
+                }
+            }
+        }
+    }
+
+    // ================= ADMIN =================
+    private static void menuAdministrador() {
+
+        int op = 0;
+
+        while (op != 5) {
+
+            System.out.println("\n=== ADMINISTRADOR ===");
+            System.out.println("1. Ver ventas");
+            System.out.println("2. Ver reporte");
+            System.out.println("3. Marcar juego perdido");
+            System.out.println("4. Guardar datos");
+            System.out.println("5. Volver");
+
+            op = Integer.parseInt(scanner.nextLine());
+
+            if (op == 1) {
+                for (Venta v : ventas) {
+                    System.out.println(v.informacion());
+                }
+            }
+
+            else if (op == 2) {
+                ReporteVentas r = new ReporteVentas(
+                        java.time.LocalDate.now().minusDays(1),
+                        java.time.LocalDate.now(),
+                        ventas
+                );
+                System.out.println(r.mostrarReporte());
+            }
+
+            else if (op == 3) {
+                System.out.println("Juego marcado como perdido.");
+            }
+
+            else if (op == 4) {
+                PersistenciaClientes.guardarClientes(clientes);
+                PersistenciaVentas.guardarVentas(ventas);
+                System.out.println("Datos guardados.");
+            }
+        }
     }
 }
