@@ -74,7 +74,7 @@ public class Juego {
                " (" + categoria + ") - Jugadores: " +
                minJugadores + "-" + maxJugadores;
     }
-
+//
 }
 
 
