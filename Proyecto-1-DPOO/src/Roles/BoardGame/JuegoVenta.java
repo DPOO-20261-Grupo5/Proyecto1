@@ -42,4 +42,9 @@ public class JuegoVenta extends Producto {
                " | Precio: " + getPrecio() +
                " | Stock: " + stockDisponible;
     }
+    
+    @Override
+    public String toString() {
+        return informacion();
+    }
 }

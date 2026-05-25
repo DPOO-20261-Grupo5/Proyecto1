@@ -74,6 +74,11 @@ public class Juego {
                " (" + categoria + ") - Jugadores: " +
                minJugadores + "-" + maxJugadores;
     }
+    
+    @Override
+    public String toString() {
+        return informacion();
+    }
 
 }
 

@@ -67,4 +67,9 @@ public class CopiaJuego {
                " | Estado: " + estado +
                " | Veces prestado: " + vecesPrestado;
     }
+    
+    @Override
+    public String toString() {
+        return informacion();
+    }
 }
