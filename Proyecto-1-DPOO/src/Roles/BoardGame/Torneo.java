@@ -8,7 +8,7 @@ import Roles.Administrador;
 import Roles.Cliente;
 import Roles.Empleado;
 import Roles.Usuario;
-
+//import BoardGame.Inscripcion;
 
 public class Torneo {
 
@@ -41,6 +41,10 @@ public class Torneo {
     
     public Administrador getAdministrador() {
     	return this.administrador;
+    }
+    
+    public int getCapacidadMaxima() {
+    	return this.capacidadMaxima;
     }
 
 
