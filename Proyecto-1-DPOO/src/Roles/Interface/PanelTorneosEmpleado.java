@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.util.List;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -13,45 +12,38 @@ import javax.swing.JTable;
 import Roles.Cliente;
 import BoardGame.Torneo;
 
-public class PanelTorneos extends JPanel {
+public class PanelTorneosEmpleado extends JPanel {
 
     private JTable tabla;
 
-    public PanelTorneos(
-            Cliente cliente,
+    public PanelTorneosEmpleado(
+
+            Cliente clienteEmpleado,
             List<Torneo> torneos) {
 
-        setLayout(new BorderLayout());
+        setLayout(
+                new BorderLayout());
         
         EstiloUI.panel(
                 this);
-        
-        JLabel titulo =
-                new JLabel(
-                        "Catalogo",
-                        JLabel.CENTER);
-
-        titulo.setFont(
-                EstiloUI.TITULO);
-
-        add(
-            titulo,
-            BorderLayout.NORTH);
 
         String[] columnas = {
                 "ID",
                 "Juego",
                 "Tipo",
                 "Fecha",
-                "Cupos"
+                "Inscritos"
         };
 
         String[][] datos =
-                new String[torneos.size()][5];
+                new String[
+                    torneos.size()
+                ][5];
 
         int i = 0;
 
-        for(Torneo t : torneos) {
+        for(Torneo t :
+                torneos) {
 
             datos[i][0] =
                     String.valueOf(
@@ -78,23 +70,26 @@ public class PanelTorneos extends JPanel {
                 new JTable(
                         datos,
                         columnas);
-        
-        EstiloUI.tabla(
-                tabla);
 
         add(
-            new JScrollPane(tabla),
+            new JScrollPane(
+                    tabla),
             BorderLayout.CENTER);
 
-        JButton btnInscribir =
+        JPanel abajo =
+                new JPanel();
+
+        JButton entrar =
                 new JButton(
                         "Inscribirse");
-        
-        JButton btnSalir =
-                new JButton(
-                        "Desinscribirse");
 
-        btnInscribir.addActionListener(e -> {
+        JButton salir =
+                new JButton(
+                        "Salir");
+
+        // INSCRIBIR
+
+        entrar.addActionListener(e -> {
 
             int fila =
                     tabla.getSelectedRow();
@@ -110,19 +105,21 @@ public class PanelTorneos extends JPanel {
 
             int id =
                     Integer.parseInt(
-                            tabla.getValueAt(
+                            tabla
+                            .getValueAt(
                                     fila,
                                     0)
                             .toString());
 
-            for(Torneo t : torneos){
+            for(Torneo t :
+                    torneos){
 
                 if(t.getId()==id){
 
                     try {
 
                         t.inscribir(
-                                cliente,
+                                clienteEmpleado,
                                 1);
 
                         JOptionPane.showMessageDialog(
@@ -132,8 +129,8 @@ public class PanelTorneos extends JPanel {
                         removeAll();
 
                         add(
-                            new PanelTorneos(
-                                    cliente,
+                            new PanelTorneosEmpleado(
+                                    clienteEmpleado,
                                     torneos),
                             BorderLayout.CENTER);
 
@@ -151,8 +148,10 @@ public class PanelTorneos extends JPanel {
                 }
             }
         });
-        
-        btnSalir.addActionListener(e -> {
+
+        // SALIR
+
+        salir.addActionListener(e -> {
 
             int fila =
                     tabla.getSelectedRow();
@@ -168,7 +167,8 @@ public class PanelTorneos extends JPanel {
 
             int id =
                     Integer.parseInt(
-                            tabla.getValueAt(
+                            tabla
+                            .getValueAt(
                                     fila,
                                     0)
                             .toString());
@@ -179,7 +179,7 @@ public class PanelTorneos extends JPanel {
                 if(t.getId()==id){
 
                     t.desinscribir(
-                            cliente);
+                            clienteEmpleado);
 
                     JOptionPane.showMessageDialog(
                             this,
@@ -188,8 +188,8 @@ public class PanelTorneos extends JPanel {
                     removeAll();
 
                     add(
-                        new PanelTorneos(
-                                cliente,
+                        new PanelTorneosEmpleado(
+                                clienteEmpleado,
                                 torneos),
                         BorderLayout.CENTER);
 
@@ -199,13 +199,14 @@ public class PanelTorneos extends JPanel {
             }
         });
 
-        JPanel abajo =
-                new JPanel();
+        abajo.add(
+                entrar);
 
-        abajo.add(btnInscribir);
-        abajo.add(btnSalir);
+        abajo.add(
+                salir);
 
-        add(abajo,
-                BorderLayout.SOUTH);
+        add(
+            abajo,
+            BorderLayout.SOUTH);
     }
 }

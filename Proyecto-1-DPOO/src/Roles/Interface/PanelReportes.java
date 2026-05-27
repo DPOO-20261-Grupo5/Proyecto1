@@ -20,6 +20,21 @@ public class PanelReportes extends JPanel {
 
         setLayout(
                 new BorderLayout());
+        
+        EstiloUI.panel(
+                this);
+        
+        JLabel titulo =
+                new JLabel(
+                        "Catalogo",
+                        JLabel.CENTER);
+
+        titulo.setFont(
+                EstiloUI.TITULO);
+
+        add(
+            titulo,
+            BorderLayout.NORTH);
 
         ReporteVentas reporte =
                 admin.generarReporte(

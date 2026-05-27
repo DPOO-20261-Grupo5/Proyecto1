@@ -20,6 +20,8 @@ public class PanelFavoritos extends JPanel {
             InventarioPrestamo inventarioPrestamo) {
 
         setLayout(new BorderLayout());
+        EstiloUI.panel(
+                this);
 
         DefaultListModel<String> modelo =
                 new DefaultListModel<>();

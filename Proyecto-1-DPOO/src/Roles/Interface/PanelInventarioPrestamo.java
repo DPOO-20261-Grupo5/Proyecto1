@@ -3,6 +3,7 @@ package Interface;
 import java.awt.BorderLayout;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -20,6 +21,21 @@ public class PanelInventarioPrestamo extends JPanel {
 
         setLayout(
                 new BorderLayout());
+        
+        EstiloUI.panel(
+                this);
+        
+        JLabel titulo =
+                new JLabel(
+                        "Catalogo",
+                        JLabel.CENTER);
+
+        titulo.setFont(
+                EstiloUI.TITULO);
+
+        add(
+            titulo,
+            BorderLayout.NORTH);
 
         String[] columnas = {
                 "ID",
@@ -63,6 +79,9 @@ public class PanelInventarioPrestamo extends JPanel {
                 new JTable(
                         datos,
                         columnas);
+        
+        EstiloUI.tabla(
+                tabla);
 
         add(
             new JScrollPane(
@@ -71,7 +90,7 @@ public class PanelInventarioPrestamo extends JPanel {
 
         JButton marcar =
                 new JButton(
-                        "Marcar desaparecido");
+                		"Cambiar estado");
 
         marcar.addActionListener(e -> {
 
@@ -87,8 +106,39 @@ public class PanelInventarioPrestamo extends JPanel {
                 return;
             }
 
+            String[] opciones = {
+                    "Nuevo",
+                    "Bueno",
+                    "Desaparecido"
+            };
+
+            String estado =
+                    (String)
+                    JOptionPane
+                    .showInputDialog(
+
+                            this,
+
+                            "Seleccione estado",
+
+                            "Estado",
+
+                            JOptionPane.PLAIN_MESSAGE,
+
+                            null,
+
+                            opciones,
+
+                            opciones[0]);
+
+            if(estado == null){
+
+                return;
+            }
+
             int id =
                     Integer.parseInt(
+
                             tabla
                             .getValueAt(
                                     fila,
@@ -103,11 +153,11 @@ public class PanelInventarioPrestamo extends JPanel {
                         == id) {
 
                     c.setEstado(
-                            "Desaparecido");
+                            estado);
 
                     JOptionPane.showMessageDialog(
                             this,
-                            "Marcado");
+                            "Estado actualizado");
 
                     removeAll();
 
@@ -118,6 +168,8 @@ public class PanelInventarioPrestamo extends JPanel {
 
                     revalidate();
                     repaint();
+
+                    break;
                 }
             }
         });

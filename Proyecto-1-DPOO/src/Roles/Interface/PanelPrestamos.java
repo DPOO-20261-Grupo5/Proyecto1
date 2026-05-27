@@ -20,6 +20,8 @@ public class PanelPrestamos extends JPanel {
             InventarioPrestamo inventarioPrestamo) {
 
         setLayout(new BorderLayout());
+        EstiloUI.panel(
+                this);
 
         String[] columnas = {
                 "ID",
@@ -56,6 +58,9 @@ public class PanelPrestamos extends JPanel {
                 new JTable(
                         datos,
                         columnas);
+        
+        EstiloUI.tabla(
+                tabla);
 
         JScrollPane scroll =
                 new JScrollPane(tabla);

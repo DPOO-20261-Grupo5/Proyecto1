@@ -15,6 +15,9 @@ public class PanelPuntos extends JPanel {
 
         setLayout(
                 new BorderLayout());
+        
+        EstiloUI.panel(
+                this);
 
         JLabel puntos =
                 new JLabel(

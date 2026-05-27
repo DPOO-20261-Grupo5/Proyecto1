@@ -20,12 +20,28 @@ public class PanelCompra extends JPanel {
             InventarioVenta inventarioVenta) {
 
         setLayout(new BorderLayout());
+        EstiloUI.panel(
+                this);
+        
+        JLabel titulo =
+                new JLabel(
+                        "Catalogo",
+                        JLabel.CENTER);
+
+        titulo.setFont(
+                EstiloUI.TITULO);
+
+        add(
+            titulo,
+            BorderLayout.NORTH);
 
         JPanel formulario =
                 new JPanel(
-                        new GridLayout(
-                                4,
-                                2));
+                		new GridLayout(
+                		        6,
+                		        2,
+                		        10,
+                		        10));
 
         JLabel lblTipo =
                 new JLabel("Tipo:");
@@ -63,7 +79,8 @@ public class PanelCompra extends JPanel {
             if(tipo.equals("Juego")){
 
                 for(JuegoVenta j :
-                        inventarioVenta.getJuegosVenta()) {
+                        inventarioVenta
+                        .getJuegosVenta()) {
 
                     comboProducto.addItem(
                             j.getJuego()
@@ -94,19 +111,155 @@ public class PanelCompra extends JPanel {
                 comboProducto.addItem(
                         "Croissant");
             }
+
+           
+
+            comboProducto.setSelectedIndex(
+                    0);
         });
         
 
         JLabel lblCantidad =
                 new JLabel(
                         "Cantidad:");
-
+        
         JTextField txtCantidad =
                 new JTextField();
+
+        JLabel lblPrecio =
+                new JLabel(
+                        "Precio: -");
+
+        JLabel lblTotal =
+                new JLabel(
+                        "Total estimado: -");
 
         JButton btnComprar =
                 new JButton(
                         "Comprar");
+        
+        comboProducto.addActionListener(ev -> {
+
+            try {
+
+                String tipo =
+                        comboTipo
+                        .getSelectedItem()
+                        .toString();
+
+                String nombre =
+                        comboProducto
+                        .getSelectedItem()
+                        .toString();
+
+                double precio = 0;
+
+                if(tipo.equals("Juego")){
+
+                    JuegoVenta j =
+                            inventarioVenta
+                            .buscarJuego(
+                                    nombre);
+
+                    if(j != null){
+
+                        precio =
+                                j.getPrecio();
+                    }
+                }
+
+                else if(tipo.equals("Bebida")){
+
+                    if(nombre.equals(
+                            "Cafe Latte")){
+
+                        precio = 12000;
+                    }
+
+                    else if(nombre.equals(
+                            "Chocolate caliente")){
+
+                        precio = 10000;
+                    }
+
+                    else{
+
+                        precio = 15000;
+                    }
+                }
+
+                else{
+
+                    if(nombre.equals(
+                            "Cheesecake")){
+
+                        precio = 14000;
+                    }
+
+                    else if(nombre.equals(
+                            "Brownie")){
+
+                        precio = 9000;
+                    }
+
+                    else{
+
+                        precio = 8000;
+                    }
+                }
+
+                lblPrecio.setText(
+                        "Precio: $"
+                        + precio);
+
+            }
+
+            catch(Exception ex){
+
+            }
+            
+        });
+        
+        txtCantidad.addKeyListener(
+
+        	    new java.awt.event.KeyAdapter() {
+
+        	        public void keyReleased(
+
+        	                java.awt.event.KeyEvent e) {
+
+        	            try {
+
+        	                String precioTxt =
+        	                        lblPrecio
+        	                        .getText()
+        	                        .replace(
+        	                                "Precio: $",
+        	                                "");
+
+        	                double precio =
+        	                        Double.parseDouble(
+        	                                precioTxt);
+
+        	                int cantidad =
+        	                        Integer.parseInt(
+        	                                txtCantidad
+        	                                .getText());
+
+        	                lblTotal.setText(
+
+        	                        "Total estimado: $"
+
+        	                        + (precio * cantidad));
+        	            }
+
+        	            catch(Exception ex){
+
+        	                lblTotal.setText(
+        	                        "Total estimado: -");
+        	            }
+        	        }
+        	    });
 
         formulario.add(lblTipo);
         formulario.add(comboTipo);
@@ -115,6 +268,18 @@ public class PanelCompra extends JPanel {
         formulario.add(comboProducto);
         formulario.add(lblCantidad);
         formulario.add(txtCantidad);
+        
+        formulario.add(
+                lblPrecio);
+
+        formulario.add(
+                new JLabel());
+
+        formulario.add(
+                lblTotal);
+
+        formulario.add(
+                new JLabel());
 
         add(formulario,
                 BorderLayout.CENTER);

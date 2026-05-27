@@ -76,7 +76,51 @@ public class ClienteFrame extends JFrame {
                         5,
                         "CARTAS",
                         false);
+        
+        Juego carcassonne =
+                new Juego(
+                        "Carcassonne",
+                        2000,
+                        "Hans im Glück",
+                        2,
+                        5,
+                        8,
+                        "TABLERO",
+                        false);
 
+        Juego dixit =
+                new Juego(
+                        "Dixit",
+                        2008,
+                        "Libellud",
+                        3,
+                        6,
+                        8,
+                        "CARTAS",
+                        false);
+
+        Juego exploding =
+                new Juego(
+                        "Exploding Kittens",
+                        2015,
+                        "Exploding Kittens",
+                        2,
+                        5,
+                        7,
+                        "CARTAS",
+                        false);
+
+        Juego risk =
+                new Juego(
+                        "Risk",
+                        1957,
+                        "Hasbro",
+                        2,
+                        6,
+                        10,
+                        "TABLERO",
+                        false);
+        
         CopiaJuego c1 =
                 new CopiaJuego(
                         1,
@@ -89,6 +133,30 @@ public class ClienteFrame extends JFrame {
                         uno,
                         "Nuevo");
         
+        CopiaJuego c3 =
+                new CopiaJuego(
+                        3,
+                        carcassonne,
+                        "Bueno");
+
+        CopiaJuego c4 =
+                new CopiaJuego(
+                        4,
+                        dixit,
+                        "Nuevo");
+
+        CopiaJuego c5 =
+                new CopiaJuego(
+                        5,
+                        exploding,
+                        "Bueno");
+
+        CopiaJuego c6 =
+                new CopiaJuego(
+                        6,
+                        risk,
+                        "Desaparecido");
+        
         JuegoVenta j1 =
                 new JuegoVenta(
                         catan,
@@ -100,6 +168,30 @@ public class ClienteFrame extends JFrame {
                         uno,
                         35000,
                         8);
+        
+        JuegoVenta j3 =
+                new JuegoVenta(
+                        carcassonne,
+                        150000,
+                        4);
+
+        JuegoVenta j4 =
+                new JuegoVenta(
+                        dixit,
+                        110000,
+                        7);
+
+        JuegoVenta j5 =
+                new JuegoVenta(
+                        exploding,
+                        90000,
+                        9);
+
+        JuegoVenta j6 =
+                new JuegoVenta(
+                        risk,
+                        175000,
+                        3);
         
         Torneo torneo1 =
                 new Torneo(
@@ -118,19 +210,81 @@ public class ClienteFrame extends JFrame {
                         8,
                         uno,
                         null);
+        
+        Torneo torneo3 =
+                new Torneo(
+                        3,
+                        "Domingo",
+                        "Amistoso",
+                        10,
+                        carcassonne,
+                        null);
+
+        Torneo torneo4 =
+                new Torneo(
+                        4,
+                        "Jueves",
+                        "Competitivo",
+                        8,
+                        dixit,
+                        null);
+
+        Torneo torneo5 =
+                new Torneo(
+                        5,
+                        "Lunes",
+                        "Amistoso",
+                        14,
+                        risk,
+                        null);
 
         
         torneos.add(torneo1);
         torneos.add(torneo2);
+        torneos.add(torneo3);
+        torneos.add(torneo4);
+        torneos.add(torneo5);
         
         inventarioVenta
                 .agregarJuegoVenta(j1);
 
         inventarioVenta
                 .agregarJuegoVenta(j2);
+        
+        inventarioVenta
+        	.agregarJuegoVenta(j3);
+
+        inventarioVenta
+        	.agregarJuegoVenta(j4);
+
+        inventarioVenta
+        	.agregarJuegoVenta(j5);
+
+        inventarioVenta
+        	.agregarJuegoVenta(j6);
 
         inventarioPrestamo.agregarCopia(c1);
         inventarioPrestamo.agregarCopia(c2);
+        inventarioPrestamo
+        	.agregarCopia(c3);
+
+        inventarioPrestamo
+        	.agregarCopia(c4);
+
+        inventarioPrestamo
+        .agregarCopia(c5);
+        
+        inventarioPrestamo
+        	.agregarCopia(c6);
+        
+        cliente.agregarJuegoFavorito(
+                catan);
+
+        cliente.agregarJuegoFavorito(
+                dixit);
+        
+        cliente.acumularPuntos(
+                120000);
     }
 
     private void construirMenu() {
@@ -154,20 +308,24 @@ public class ClienteFrame extends JFrame {
     	                52,
     	                54));
     	
+    	JButton btnInicio =
+    	        new JButton(
+    	                "🏠 Inicio");
+    	
         JButton btnCatalogo =
-                new JButton("Catalogo");
+                new JButton("📚 Catalogo");
 
         JButton btnPrestamos =
-                new JButton("Prestamos");
+                new JButton("📚 Prestamos");
 
         JButton btnCompra =
-                new JButton("Compra");
+                new JButton("🛒 Compra");
 
         JButton btnTorneos =
-                new JButton("Torneos");
+                new JButton("🏆 Torneos");
         
         JButton btnFavoritos =
-                new JButton("Favoritos");
+                new JButton("⭐ Favoritos");
  
         JButton btnPuntos =
                 new JButton("Puntos");
@@ -178,10 +336,16 @@ public class ClienteFrame extends JFrame {
                         "Dulces & Dados");
 
         titulo.setForeground(
-                Color.WHITE);
+        		new Color(
+        		        223,
+        		        230,
+        		        233));
 
         titulo.setHorizontalAlignment(
                 JLabel.CENTER);
+        
+        titulo.setFont(
+                EstiloUI.TITULO);
 
         menuPanel.add(titulo);
         
@@ -312,17 +476,43 @@ public class ClienteFrame extends JFrame {
             contenidoPanel.repaint();
         });
         
+        //INICIO
+        
+        btnInicio.addActionListener(e -> {
+
+            contenidoPanel.removeAll();
+
+            contenidoPanel.setLayout(
+                    new BorderLayout());
+
+            contenidoPanel.add(
+
+                new PanelHomeCliente(
+                        cliente),
+
+                BorderLayout.CENTER);
+
+            contenidoPanel.revalidate();
+            contenidoPanel.repaint();
+        });
+        
         
 
         // =========================
         
-        estilizarBoton(btnCatalogo);
-        estilizarBoton(btnPrestamos);
-        estilizarBoton(btnCompra);
-        estilizarBoton(btnTorneos);
-        estilizarBoton(btnFavoritos);
-        estilizarBoton(btnPuntos);
+        EstiloUI.boton(btnCatalogo);
+        EstiloUI.boton(btnPrestamos);
+        EstiloUI.boton(btnCompra);
+        EstiloUI.boton(btnTorneos);
+        EstiloUI.boton(btnFavoritos);
+        EstiloUI.boton(btnPuntos);
+        EstiloUI.boton(btnInicio);
+        
+        menuPanel.add(
+                btnInicio);
 
+        menuPanel.add(
+                btnCatalogo);
         menuPanel.add(btnCatalogo);
         menuPanel.add(btnPrestamos);
         menuPanel.add(btnCompra);
@@ -343,27 +533,16 @@ public class ClienteFrame extends JFrame {
                 BorderLayout.CENTER);
         
         contenidoPanel.setBackground(
-                Color.WHITE);
+                EstiloUI.FONDO);
+        
+        contenidoPanel.setLayout(
+                new BorderLayout());
+
+        contenidoPanel.add(
+                new PanelHomeCliente(
+                        cliente),
+                BorderLayout.CENTER);
     }
     
-    private void estilizarBoton(
-            JButton boton) {
 
-        boton.setBackground(
-                new Color(
-                        99,
-                        110,
-                        114));
-
-        boton.setForeground(
-                Color.WHITE);
-
-        boton.setFocusPainted(
-                false);
-
-        boton.setPreferredSize(
-                new java.awt.Dimension(
-                        150,
-                        45));
-    }
 }

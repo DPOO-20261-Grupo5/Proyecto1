@@ -19,6 +19,8 @@ public class PanelGraficaBarras extends JPanel {
 
         setLayout(
                 new BorderLayout());
+        EstiloUI.panel(
+                this);
 
         DefaultCategoryDataset dataset =
                 new DefaultCategoryDataset();

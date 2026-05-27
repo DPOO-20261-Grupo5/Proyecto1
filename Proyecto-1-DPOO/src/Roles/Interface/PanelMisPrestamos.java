@@ -19,6 +19,9 @@ public class PanelMisPrestamos extends JPanel {
             Cliente cliente) {
 
         setLayout(new BorderLayout());
+        
+        EstiloUI.panel(
+                this);
 
         String[] columnas = {
                 "ID",
@@ -56,6 +59,9 @@ public class PanelMisPrestamos extends JPanel {
                 new JTable(
                         datos,
                         columnas);
+        
+        EstiloUI.tabla(
+                tabla);
 
         add(
             new JScrollPane(tabla),

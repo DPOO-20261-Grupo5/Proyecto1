@@ -23,6 +23,9 @@ public class PanelGraficaPastel extends JPanel {
 
         setLayout(
                 new BorderLayout());
+        
+        EstiloUI.panel(
+                this);
 
         int venta = 0;
         int prestamo = 0;

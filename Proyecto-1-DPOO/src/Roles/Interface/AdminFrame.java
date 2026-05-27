@@ -27,6 +27,7 @@ public class AdminFrame extends JFrame {
     private List<Torneo> torneos;
     private List<Venta> ventas;
     private Administrador admin;
+    private List<SolicitudCambioTurno> solicitudes;
 
     public AdminFrame() {
 
@@ -64,6 +65,9 @@ public class AdminFrame extends JFrame {
         
         ventas =
                 new ArrayList<>();
+        
+        solicitudes =
+                new ArrayList<>();
 
         Juego catan =
                 new Juego(
@@ -86,6 +90,61 @@ public class AdminFrame extends JFrame {
                         5,
                         "CARTAS",
                         false);
+        
+        Juego carcassonne =
+                new Juego(
+                        "Carcassonne",
+                        2000,
+                        "Hans im Glück",
+                        2,
+                        5,
+                        8,
+                        "TABLERO",
+                        false);
+
+        Juego monopoly =
+                new Juego(
+                        "Monopoly",
+                        1935,
+                        "Hasbro",
+                        2,
+                        6,
+                        8,
+                        "TABLERO",
+                        false);
+
+        Juego dixit =
+                new Juego(
+                        "Dixit",
+                        2008,
+                        "Libellud",
+                        3,
+                        6,
+                        8,
+                        "CARTAS",
+                        false);
+
+        Juego exploding =
+                new Juego(
+                        "Exploding Kittens",
+                        2015,
+                        "Exploding Kittens",
+                        2,
+                        5,
+                        7,
+                        "CARTAS",
+                        false);
+
+        Juego risk =
+                new Juego(
+                        "Risk",
+                        1957,
+                        "Hasbro",
+                        2,
+                        6,
+                        10,
+                        "TABLERO",
+                        false);
 
         JuegoVenta j1 =
                 new JuegoVenta(
@@ -99,6 +158,36 @@ public class AdminFrame extends JFrame {
                         35000,
                         8);
         
+        JuegoVenta j3 =
+                new JuegoVenta(
+                        carcassonne,
+                        150000,
+                        4);
+
+        JuegoVenta j4 =
+                new JuegoVenta(
+                        monopoly,
+                        130000,
+                        6);
+
+        JuegoVenta j5 =
+                new JuegoVenta(
+                        dixit,
+                        110000,
+                        7);
+
+        JuegoVenta j6 =
+                new JuegoVenta(
+                        exploding,
+                        90000,
+                        9);
+
+        JuegoVenta j7 =
+                new JuegoVenta(
+                        risk,
+                        175000,
+                        3);
+        
         CopiaJuego c1 =
                 new CopiaJuego(
                         1,
@@ -110,6 +199,84 @@ public class AdminFrame extends JFrame {
                         2,
                         uno,
                         "Nuevo");
+        
+        CopiaJuego c3 =
+                new CopiaJuego(
+                        3,
+                        carcassonne,
+                        "Bueno");
+
+        CopiaJuego c4 =
+                new CopiaJuego(
+                        4,
+                        monopoly,
+                        "Nuevo");
+
+        CopiaJuego c5 =
+                new CopiaJuego(
+                        5,
+                        dixit,
+                        "Bueno");
+
+        CopiaJuego c6 =
+                new CopiaJuego(
+                        6,
+                        exploding,
+                        "Desaparecido");
+
+        CopiaJuego c7 =
+                new CopiaJuego(
+                        7,
+                        risk,
+                        "Nuevo");
+        
+        Turno turno1 =
+                new Turno(
+                        "Lunes",
+                        java.time.LocalTime.of(8,0),
+                        java.time.LocalTime.of(16,0));
+
+        Turno turno2 =
+                new Turno(
+                        "Martes",
+                        java.time.LocalTime.of(10,0),
+                        java.time.LocalTime.of(18,0));
+
+        SolicitudCambioTurno s1 =
+                new SolicitudCambioTurno(
+                        1,
+                        admin,
+                        turno1,
+                        turno2,
+                        "CAMBIO");
+
+        solicitudes.add(
+                s1);
+        
+        Turno turno3 =
+                new Turno(
+                        "Miercoles",
+                        java.time.LocalTime.of(12,0),
+                        java.time.LocalTime.of(20,0));
+
+        SolicitudCambioTurno s2 =
+                new SolicitudCambioTurno(
+                        2,
+                        admin,
+                        turno2,
+                        turno3,
+                        "INTERCAMBIO");
+
+        SolicitudCambioTurno s3 =
+                new SolicitudCambioTurno(
+                        3,
+                        admin,
+                        turno3,
+                        turno1,
+                        "CAMBIO");
+
+        solicitudes.add(s2);
+        solicitudes.add(s3);
         
         Torneo t1 =
                 new Torneo(
@@ -128,6 +295,35 @@ public class AdminFrame extends JFrame {
                         8,
                         uno,
                         null);
+        
+        Torneo t3 =
+                new Torneo(
+                        3,
+                        "Domingo",
+                        "Amistoso",
+                        10,
+                        monopoly,
+                        null);
+
+        Torneo t4 =
+                new Torneo(
+                        4,
+                        "Jueves",
+                        "Competitivo",
+                        8,
+                        dixit,
+                        null);
+
+        Torneo t5 =
+                new Torneo(
+                        5,
+                        "Lunes",
+                        "Amistoso",
+                        14,
+                        risk,
+                        null);
+
+
         
         Venta v1 =
                 new Venta(
@@ -200,6 +396,109 @@ public class AdminFrame extends JFrame {
 
         ventas.add(v5);
         
+        Venta v6 =
+                new Venta(
+                        6,
+                        LocalDate.now().minusDays(4));
+
+        v6.agregarItem(
+                new ItemVenta(
+                        new Bebida(
+                                "Chocolate",
+                                15000,
+                                false,
+                                true),
+                        2,
+                        15000));
+
+        ventas.add(v6);
+        
+        Venta v7 =
+                new Venta(
+                        7,
+                        LocalDate.now().minusDays(3));
+
+        v7.agregarItem(
+                new ItemVenta(
+                        j4,
+                        1,
+                        j4.getPrecio()));
+
+        ventas.add(v7);
+        
+        Venta v8 =
+                new Venta(
+                        8,
+                        LocalDate.now().minusDays(2));
+
+        v8.agregarItem(
+                new ItemVenta(
+                        new Pasteleria(
+                                "Cheesecake",
+                                14000),
+                        3,
+                        14000));
+
+        ventas.add(v8);
+        
+        Venta v9 =
+                new Venta(
+                        9,
+                        LocalDate.now().minusDays(1));
+
+        v9.agregarItem(
+                new ItemVenta(
+                        j5,
+                        2,
+                        j5.getPrecio()));
+
+        ventas.add(v9);
+        
+        Venta v10 =
+                new Venta(
+                        10,
+                        LocalDate.now());
+
+        v10.agregarItem(
+                new ItemVenta(
+                        new Bebida(
+                                "Capuccino",
+                                13000,
+                                false,
+                                true),
+                        2,
+                        13000));
+
+        ventas.add(v10);
+        
+        Venta v11 =
+                new Venta(
+                        11,
+                        LocalDate.now());
+
+        v11.agregarItem(
+                new ItemVenta(
+                        j6,
+                        1,
+                        j6.getPrecio()));
+
+        ventas.add(v11);
+        
+        Venta v12 =
+                new Venta(
+                        12,
+                        LocalDate.now());
+
+        v12.agregarItem(
+                new ItemVenta(
+                        new Pasteleria(
+                                "Croissant",
+                                10000),
+                        4,
+                        10000));
+
+        ventas.add(v12);
+        
         Cliente cliente1 =
                 new Cliente(
                         1,
@@ -237,7 +536,10 @@ public class AdminFrame extends JFrame {
 
         torneos.add(t1);
         torneos.add(t2);
-
+        torneos.add(t3);
+        torneos.add(t4);
+        torneos.add(t5);
+        
         inventarioPrestamo
                 .agregarCopia(c1);
 
@@ -251,6 +553,18 @@ public class AdminFrame extends JFrame {
         inventarioVenta
                 .agregarJuegoVenta(
                         j2);
+        
+        inventarioPrestamo.agregarCopia(c3);
+        inventarioPrestamo.agregarCopia(c4);
+        inventarioPrestamo.agregarCopia(c5);
+        inventarioPrestamo.agregarCopia(c6);
+        inventarioPrestamo.agregarCopia(c7);
+        
+        inventarioVenta.agregarJuegoVenta(j3);
+        inventarioVenta.agregarJuegoVenta(j4);
+        inventarioVenta.agregarJuegoVenta(j5);
+        inventarioVenta.agregarJuegoVenta(j6);
+        inventarioVenta.agregarJuegoVenta(j7);
     }
 
     private void construirMenu() {
@@ -280,36 +594,46 @@ public class AdminFrame extends JFrame {
                         "ADMIN");
 
         titulo.setForeground(
-                Color.WHITE);
+        		new Color(
+        		        223,
+        		        230,
+        		        233));
 
         titulo.setHorizontalAlignment(
                 JLabel.CENTER);
+        
+        titulo.setFont(
+                EstiloUI.TITULO);
 
         menuPanel.add(titulo);
+        
+        JButton btnInicio =
+                new JButton(
+                        "🏠 Inicio");
 
         JButton btnInventarioVenta =
                 new JButton(
-                        "Inventario Venta");
+                        "📦 Inventario Venta");
 
         JButton btnInventarioPrestamo =
                 new JButton(
-                        "Inventario Prestamo");
+                        "📚 Inventario Prestamo");
 
         JButton btnTorneos =
                 new JButton(
-                        "Torneos");
+                        "🏆 Torneos");
 
         JButton btnSolicitudes =
                 new JButton(
-                        "Solicitudes");
+                        "📋 Solicitudes");
 
         JButton btnReportes =
                 new JButton(
-                        "Reportes");
+                        "📊 Reportes");
         
         JButton btnGraficas =
                 new JButton(
-                        "Graficas");
+                        "📈 Graficas");
         
         btnInventarioVenta.addActionListener(e -> {
 
@@ -343,6 +667,18 @@ public class AdminFrame extends JFrame {
                     new PanelTorneosAdmin(
                             torneos,
                             inventarioVenta));
+
+            contenidoPanel.revalidate();
+            contenidoPanel.repaint();
+        });
+        
+        btnSolicitudes.addActionListener(e -> {
+
+            contenidoPanel.removeAll();
+
+            contenidoPanel.add(
+                    new PanelSolicitudesAdmin(
+                            solicitudes));
 
             contenidoPanel.revalidate();
             contenidoPanel.repaint();
@@ -429,24 +765,50 @@ public class AdminFrame extends JFrame {
             contenidoPanel.revalidate();
             contenidoPanel.repaint();
         });
+        
+        btnInicio.addActionListener(e -> {
 
-        estilizarBoton(
+            contenidoPanel.removeAll();
+
+            contenidoPanel.setLayout(
+                    new BorderLayout());
+
+            contenidoPanel.add(
+
+                new PanelHomeAdmin(
+
+                        ventas.size(),
+                        torneos.size()),
+
+                BorderLayout.CENTER);
+
+            contenidoPanel.revalidate();
+            contenidoPanel.repaint();
+        });
+
+        EstiloUI.boton(
                 btnInventarioVenta);
 
-        estilizarBoton(
+        EstiloUI.boton(
                 btnInventarioPrestamo);
 
-        estilizarBoton(
+        EstiloUI.boton(
                 btnTorneos);
 
-        estilizarBoton(
+        EstiloUI.boton(
                 btnSolicitudes);
 
-        estilizarBoton(
+        EstiloUI.boton(
                 btnReportes);
         
-        estilizarBoton(
+        EstiloUI.boton(
                 btnGraficas);
+        
+        EstiloUI.boton(
+                btnInicio);
+        
+        menuPanel.add(
+                btnInicio);
 
         menuPanel.add(
                 btnInventarioVenta);
@@ -477,26 +839,24 @@ public class AdminFrame extends JFrame {
                 new JPanel();
 
         contenidoPanel.setBackground(
-                Color.WHITE);
-
+                EstiloUI.FONDO);
+        
         add(
             contenidoPanel,
             BorderLayout.CENTER);
+        
+        contenidoPanel.setLayout(
+                new BorderLayout());
+
+        contenidoPanel.add(
+
+                new PanelHomeAdmin(
+
+                        ventas.size(),
+                        torneos.size()),
+
+                BorderLayout.CENTER);
     }
+}  
+ 
 
-    private void estilizarBoton(
-            JButton boton) {
-
-        boton.setBackground(
-                new Color(
-                        99,
-                        110,
-                        114));
-
-        boton.setForeground(
-                Color.WHITE);
-
-        boton.setFocusPainted(
-                false);
-    }
-}

@@ -3,6 +3,7 @@ package Interface;
 import java.awt.BorderLayout;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -19,6 +20,21 @@ public class PanelInventarioVenta extends JPanel {
 
         setLayout(
                 new BorderLayout());
+        
+        EstiloUI.panel(
+                this);
+        
+        JLabel titulo =
+                new JLabel(
+                        "Catalogo",
+                        JLabel.CENTER);
+
+        titulo.setFont(
+                EstiloUI.TITULO);
+
+        add(
+            titulo,
+            BorderLayout.NORTH);
 
         String[] columnas = {
                 "Juego",
@@ -58,6 +74,9 @@ public class PanelInventarioVenta extends JPanel {
                 new JTable(
                         datos,
                         columnas);
+        
+        EstiloUI.tabla(
+                tabla);
 
         add(
             new JScrollPane(

@@ -2,6 +2,7 @@ package Interface;
 
 import java.awt.BorderLayout;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -15,6 +16,20 @@ public class PanelCatalogo extends JPanel {
             InventarioPrestamo inventarioPrestamo) {
 
         setLayout(new BorderLayout());
+        EstiloUI.panel(
+                this);
+        
+        JLabel titulo =
+                new JLabel(
+                        "Catalogo",
+                        JLabel.CENTER);
+
+        titulo.setFont(
+                EstiloUI.TITULO);
+
+        add(
+            titulo,
+            BorderLayout.NORTH);
 
         String[] columnas = {
                 "ID",
@@ -55,6 +70,9 @@ public class PanelCatalogo extends JPanel {
                 new JTable(
                         datos,
                         columnas);
+        
+        EstiloUI.tabla(
+                tabla);
 
         JScrollPane scroll =
                 new JScrollPane(tabla);

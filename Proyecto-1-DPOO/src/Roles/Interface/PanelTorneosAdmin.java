@@ -21,6 +21,9 @@ public class PanelTorneosAdmin extends JPanel {
 
         setLayout(
                 new BorderLayout());
+        
+        EstiloUI.panel(
+                this);
 
         String[] columnas = {
                 "ID",
