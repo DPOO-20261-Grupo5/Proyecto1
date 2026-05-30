@@ -72,6 +72,23 @@ public class EmpleadoFrame extends JFrame {
                         "Lunes",
                         LocalTime.of(8,0),
                         LocalTime.of(16,0));
+        
+        Turno turnoNuevo =
+                new Turno(
+                        "Martes",
+                        LocalTime.of(10,0),
+                        LocalTime.of(18,0));
+
+        SolicitudCambioTurno s1 =
+                new SolicitudCambioTurno(
+                        1,
+                        empleado,
+                        turno,
+                        turnoNuevo,
+                        "INTERCAMBIO");
+
+        solicitudes.add(
+                s1);
 
         empleado =
                 new Mesero(
@@ -98,26 +115,121 @@ public class EmpleadoFrame extends JFrame {
                         10,
                         "TABLERO",
                         false);
+        
+        Juego uno =
+                new Juego(
+                        "Uno",
+                        1971,
+                        "Mattel",
+                        2,
+                        10,
+                        5,
+                        "CARTAS",
+                        false);
+
+        Juego dixit =
+                new Juego(
+                        "Dixit",
+                        2008,
+                        "Libellud",
+                        3,
+                        6,
+                        8,
+                        "CARTAS",
+                        false);
+
+        Juego carcassonne =
+                new Juego(
+                        "Carcassonne",
+                        2000,
+                        "Hans im Glück",
+                        2,
+                        5,
+                        8,
+                        "TABLERO",
+                        false);
 
         JuegoVenta j1 =
                 new JuegoVenta(
                         catan,
                         180000,
                         5);
+        
+        JuegoVenta j2 =
+                new JuegoVenta(
+                        uno,
+                        35000,
+                        8);
+
+        JuegoVenta j3 =
+                new JuegoVenta(
+                        dixit,
+                        110000,
+                        7);
+
+        JuegoVenta j4 =
+                new JuegoVenta(
+                        carcassonne,
+                        150000,
+                        4);
 
         inventarioVenta
                 .agregarJuegoVenta(
                         j1);
+    
+        inventarioVenta
+        		.agregarJuegoVenta(
+        				j2);
+        
+        inventarioVenta
+        		.agregarJuegoVenta(
+        				j3);
+
+        inventarioVenta
+        		.agregarJuegoVenta(
+        				j4);
+    	
+    
 
         CopiaJuego copia1 =
                 new CopiaJuego(
                         1,
                         catan,
                         "Bueno");
+        
+        CopiaJuego copia2 =
+                new CopiaJuego(
+                        2,
+                        uno,
+                        "Nuevo");
+
+        CopiaJuego copia3 =
+                new CopiaJuego(
+                        3,
+                        dixit,
+                        "Bueno");
+
+        CopiaJuego copia4 =
+                new CopiaJuego(
+                        4,
+                        carcassonne,
+                        "Desaparecido");
 
         inventarioPrestamo
                 .agregarCopia(
                         copia1);
+        
+        inventarioPrestamo
+        		.agregarCopia(
+        				copia2);
+
+        inventarioPrestamo
+        		.agregarCopia(
+        				copia3);
+
+        inventarioPrestamo
+        		.agregarCopia(
+        				copia4);
 
         Torneo torneo1 =
                 new Torneo(
@@ -127,9 +239,52 @@ public class EmpleadoFrame extends JFrame {
                         12,
                         catan,
                         null);
+        
+        Torneo torneo2 =
+                new Torneo(
+                        2,
+                        "Sabado",
+                        "Amistoso",
+                        8,
+                        uno,
+                        null);
+
+        Torneo torneo3 =
+                new Torneo(
+                        3,
+                        "Domingo",
+                        "Competitivo",
+                        10,
+                        dixit,
+                        null);
 
         torneos.add(
                 torneo1);
+        
+        torneos.add(
+                torneo2);
+
+        torneos.add(
+                torneo3);
+        
+        Prestamo p1 =
+                new Prestamo(
+                        1,
+                        java.time.LocalDate.now()
+                        .minusDays(2),
+                        copia1);
+
+        prestamosEmpleado.add(
+                p1);
+        
+        sugerencias.add(
+                "Agregar mas juegos cooperativos");
+
+        sugerencias.add(
+                "Promocion cafe + juego");
+
+        sugerencias.add(
+                "Torneo mensual de Dixit");
     }
 
     private void construirMenu() {
